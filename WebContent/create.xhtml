@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>    
+        <title>Cadastro de Imóveis</title>
+        <h:outputStylesheet name="/css/bootstrap.min.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="form" class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-4"></div>
+                <div  class="col-sm-4">
+                    <h2 style="text-align: center">Preencha os Dados</h2>
+                </div>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <h:outputLabel for="titulo" class="control-label col-sm-4">Título do Imóvel</h:outputLabel>
+                <div class="col-sm-4">
+                    <h:inputText id="name-id" value="#{imovel.titulo}" class="form-control" validatorMessage="Título é Obrigatório">
+                        <f:validateRequired />
+                    </h:inputText>
+                </div>
+            </div>
+            <div class="form-group">
+                <h:outputLabel for="endereco" class="control-label col-sm-4">Endereço do Imóvel</h:outputLabel>
+                <div class="col-sm-4">
+                    <h:inputText id="endereco-id" value="#{imovel.endereco}" class="form-control" validatorMessage="Endereço é obrigatório">
+                        <f:validateRequired/>
+                    </h:inputText>
+                </div>
+            </div>
+          
+            <div class="form-group">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <div class="col-sm-2">
+                        <h:commandButton value="Save" action="#{imovel.salvar()}" class="btn btn-success" style="width: 80px;"></h:commandButton>
+                    </div>
+                    <div class="col-sm-1">
+                    </div>
+                    <div class="col-sm-2">
+                        <h:link outcome="index" value="Ver Imóveis Cadastrados" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </h:body>
+</html>
