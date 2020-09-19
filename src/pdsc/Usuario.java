@@ -1,70 +1,101 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package pdsc;
-//
-//import java.io.Serializable;
-//import javax.persistence.Column;
-//import javax.persistence.Entity;
-//import javax.persistence.Id;
-//import javax.persistence.Table;
-//
-///**
-// *
-// * @author masc0
-// */
-//@Entity
-//@Table(name = "TB_USUARIO")
-//public class Usuario implements Serializable {
-//
-//    private static final long serialVersionUID = 1L;
-//    @Id
-//    private Long id;
-//    
-//    @Column(name = "TXT_NOME")
-//    private String nome;
-//
-//    public String getNome() {
-//        return nome;
-//    }
-//
-//    public void setNome(String nome) {
-//        this.nome = nome;
-//    }
-//
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int hash = 0;
-//        hash += (id != null ? id.hashCode() : 0);
-//        return hash;
-//    }
-//
-//    @Override
-//    public boolean equals(Object object) {
-//        // TODO: Warning - this method won't work in the case the id fields are not set
-//        if (!(object instanceof Usuario)) {
-//            return false;
-//        }
-//        Usuario other = (Usuario) object;
-//        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-//            return false;
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        return "pdsc.Usuario[ id=" + id + ", " + nome + " ]";
-//    }
-//    
-//}
+package pdsc;
+
+import static javax.persistence.PersistenceContextType.TRANSACTION;
+
+import java.io.Serializable;
+
+import javax.annotation.Resource;
+import javax.ejb.Stateless;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.transaction.UserTransaction;
+
+import com.sun.istack.internal.NotNull;
+
+@SuppressWarnings("deprecation")
+@Entity
+@Table(name = "TB_USUARIO")
+@Stateless
+@ManagedBean
+@RequestScoped
+
+public class Usuario implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
+	@Id
+    @GeneratedValue
+    private Long id;
+    
+	@NotNull
+    @Column(name = "TXT_NOME")
+    private String nome;
+    
+	@NotNull
+    @Column(name = "TXT_SENHA")
+    private String senha;
+    
+	@NotNull
+    @Column(name = "TXT_EMAIL")
+    private String email;
+        
+    @Transient
+    @PersistenceContext(name = "pdsc", type = TRANSACTION)
+    private EntityManager entityManager;
+    
+    @Transient
+    @Resource
+    private UserTransaction userTransaction;
+    
+    //<-----gets & sets----->//
+    
+    //----Id----//
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	//----Nome----//
+	public String getNome() {
+		return nome;
+	}
+
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+    
+    //----Senha----//
+	public String getSenha() {
+		return senha;
+	}
+
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	//----Email----//
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	//
+
+}
