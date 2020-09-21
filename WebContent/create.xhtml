@@ -12,10 +12,11 @@
             <div class="form-group">
                 <div class="col-sm-4"></div>
                 <div  class="col-sm-4">
-                    <h2 style="text-align: center">Preencha os Dados</h2>
+                    <h2 style="text-align: center">Preencha os Dados do Imóvel</h2>
                 </div>
             </div>
             <hr/>
+            <br/>
             <div class="form-group">
                 <h:outputLabel for="titulo" class="control-label col-sm-4">Título do Imóvel</h:outputLabel>
                 <div class="col-sm-4">
@@ -24,6 +25,8 @@
                     </h:inputText>
                 </div>
             </div>
+            <br/>
+            <br/>
             <div class="form-group">
                 <h:outputLabel for="endereco" class="control-label col-sm-4">Endereço do Imóvel</h:outputLabel>
                 <div class="col-sm-4">
@@ -32,16 +35,45 @@
                     </h:inputText>
                 </div>
             </div>
-          
+            <br/>
+            <br/>
+            <div class="form-group">
+                <h:outputLabel for="quartos" class="control-label col-sm-4">Quantidade de quartos</h:outputLabel>
+                <div class="col-sm-4">
+                    <h:inputText type="number" id="quartos-id" value="#{imovel.quartos}" class="form-control" validatorMessage="Quantidade de quartos é obrigatório" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;">
+                        <f:validateRequired/>
+                    </h:inputText>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="form-group">
+                <h:outputLabel for="garagem" class="control-label col-sm-4">Possui Garagem ?</h:outputLabel>
+                <div class="col-sm-4">
+                    <h:selectBooleanCheckbox value="#{imovel.garagem}" id="garagem" /> 
+                </div>
+            </div>            
+            <br/>
+            <br/>
+            <div class="form-group">
+                <h:outputLabel for="garagem" class="control-label col-sm-4">Possui Piscina ?</h:outputLabel>
+                <div class="col-sm-4">
+                    <h:selectBooleanCheckbox value="#{imovel.piscina}" id="piscina" /> 
+                </div>
+            </div>
+            <br/>
+            <br/>
             <div class="form-group">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
-                    <div class="col-sm-2">
-                        <h:commandButton value="Save" action="#{imovel.salvar()}" class="btn btn-success" style="width: 80px;"></h:commandButton>
+                    <div class="col-sm-6">
+                        <h:commandButton value="Cadastrar Imóvel" action="#{imovel.save()}" class="btn btn-success"></h:commandButton>
                     </div>
-                    <div class="col-sm-1">
-                    </div>
-                    <div class="col-sm-2">
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="col-sm-6">
                         <h:link outcome="index" value="Ver Imóveis Cadastrados" class="btn btn-primary" />
                     </div>
                 </div>

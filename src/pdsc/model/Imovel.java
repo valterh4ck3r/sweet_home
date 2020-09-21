@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdsc;
+package pdsc.model;
 
 import static javax.persistence.PersistenceContextType.TRANSACTION;
-import static javax.persistence.PersistenceContextType.EXTENDED;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -30,6 +29,11 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
@@ -54,7 +58,16 @@ public class Imovel implements Serializable {
     
     @Column(name = "TXT_ENDERECO")
     private String endereco;
-        
+    
+    @Column(name = "INT_QUARTOS")
+    private Integer quartos;
+    
+    @Column(name = "BOOL_PISCINA")
+    private Boolean piscina;
+    
+    @Column(name = "BOOL_GARAGEM")
+    private boolean garagem;
+    
     @Transient
     @PersistenceContext(name = "pdsc", type = TRANSACTION)
     private EntityManager entityManager;
@@ -62,13 +75,12 @@ public class Imovel implements Serializable {
     @Transient
     @Resource
     private UserTransaction userTransaction;
-
-    public void salvar(Imovel imovel) {
-        entityManager.persist(imovel);
-    }
     
     @Transient
     ArrayList usersList;
+    
+    @Transient
+    Imovel imovelToUpdate;
 
     public List<Imovel> list() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -79,50 +91,39 @@ public class Imovel implements Serializable {
         return allQuery.getResultList();
     }
 
-    public String salvar(){
-        int result = 0;
-        try{
-            Imovel newImovel = new Imovel();
-            newImovel.setTitulo(titulo);
-            newImovel.setEndereco(endereco);
-            userTransaction.begin();
-        	entityManager.persist(newImovel);
-        	 userTransaction.commit();
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        if(result !=0)
-            return "index.xhtml?faces-redirect=true";
-        else return "create.xhtml?faces-redirect=true";
-    }
-
     public String save(){
-        int result = 0;
-        try{
-        	entityManager.persist(new Imovel());
-        }catch(Exception e){
-            System.out.println(e);
-        }
-        if(result !=0)
-            return "index.xhtml?faces-redirect=true";
-        else return "create.xhtml?faces-redirect=true";
+    	try {
+    		Imovel novoImovel = new Imovel();
+        	novoImovel.setTitulo(titulo);
+        	novoImovel.setEndereco(endereco);
+        	novoImovel.setGaragem(garagem);
+        	novoImovel.setPiscina(piscina);
+        	novoImovel.setQuartos(quartos);
+            userTransaction.begin();
+        	entityManager.persist(novoImovel);
+        	userTransaction.commit();
+    	} catch(Exception e) {
+    		System.out.println(e);
+    	}
+    	return "index.xhtml?faces-redirect=true";
     }
 
-    public String edit(int id){
-    	Imovel imovel = null;
-        System.out.println(id);
+    public String edit(Imovel imoveltoUpdate){
         try{
-        	// Obter Imovel pelo ID
+        	this.imovelToUpdate = imoveltoUpdate;
+        	this.id = imoveltoUpdate.id;
+        	this.titulo = imoveltoUpdate.titulo;
         }catch(Exception e){
             System.out.println(e);
         }       
         return "/edit.xhtml?faces-redirect=true";
     }
 
-    public String update(Imovel u){
-        //int result = 0;
+    public String update(Imovel updatedImovel){
         try{
-
+	        userTransaction.begin();
+	    	entityManager.merge(this.imovelToUpdate);
+	    	userTransaction.commit();
         	// Atualizar Usuario
         }catch(Exception e){
             System.out.println();
@@ -130,34 +131,34 @@ public class Imovel implements Serializable {
         return "/index.xhtml?faces-redirect=true";      
     }
 
-    public void delete(int id){
+	public String delete(Imovel deleteImovel){
         try{
-            // Remover Usuario
+        	System.out.println(deleteImovel);
+	        userTransaction.begin();
+	        entityManager.createQuery("DELETE FROM Imovel WHERE id = " + deleteImovel.id).executeUpdate();
+	    	userTransaction.commit();
         }catch(Exception e){
             System.out.println(e);
         }
+        return "/index.xhtml?faces-redirect=true";   
     }
 
 
-    public Long getId() {
+	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public String getTitulo() {
 		return titulo;
 	}
 
-
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-
 
 	public String getEndereco() {
 		return endereco;
@@ -167,6 +168,29 @@ public class Imovel implements Serializable {
 		this.endereco = endereco;
 	}
 
+	public Integer getQuartos() {
+		return quartos;
+	}
+
+	public void setQuartos(Integer quartos) {
+		this.quartos = quartos;
+	}
+
+	public Boolean getPiscina() {
+		return piscina;
+	}
+
+	public void setPiscina(Boolean piscina) {
+		this.piscina = piscina;
+	}
+
+	public boolean getGaragem() {
+		return garagem;
+	}
+
+	public void setGaragem(boolean garagem) {
+		this.garagem = garagem;
+	}
 
 	@Override
     public int hashCode() {
@@ -187,5 +211,19 @@ public class Imovel implements Serializable {
         }
         return true;
     }
+    
+    public Imovel getImovelToUpdate() {
+		return imovelToUpdate;
+	}
+
+	public void setImovelToUpdate(Imovel imovelToUpdate) {
+		this.imovelToUpdate = imovelToUpdate;
+	}
+
+	@Override
+	public String toString() {
+		return "Imovel [id=" + id + ", titulo=" + titulo + ", endereco=" + endereco + ", quartos=" + quartos
+				+ ", piscina=" + piscina + ", garagem=" + garagem + "]";
+	}
     
 }
