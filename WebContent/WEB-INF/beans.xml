@@ -4,6 +4,6 @@
        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd"
        bean-discovery-mode="all">
        
-<bean id="Imovel" class="pdsc.Imovel" />
+<bean id="Imovel" class="sweethome.Imovel" />
        
 </beans>

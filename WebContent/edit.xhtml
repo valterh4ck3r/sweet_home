@@ -4,53 +4,89 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>    
-        <title>Edit Your Record</title>
+        <title>Editar Imóvel</title>
         <h:outputStylesheet name="/css/bootstrap.min.css"/>
     </h:head>
-    <h:body>
+   <h:body>
         <h:form id="form" class="form-horizontal">
             <div class="form-group">
-                <div class="col-sm-2"></div>
-                <h2 style="text-align: center" class="col-sm-4">Edit Your Record</h2>
+                <div class="col-sm-4"></div>
+                <div  class="col-sm-4">
+                    <h2 style="text-align: center">Atualizar Dados do Imóvel</h2>
+                </div>
             </div>
             <hr/>
+            <br/>
             <div class="form-group">
-                <h:outputLabel for="username" class="control-label col-sm-2">User Name</h:outputLabel>
+                <h:outputLabel for="titulo" class="control-label col-sm-4">ID do Imóvel</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputText id="name-id" value="#{editUser.name}" class="form-control"/>
+                    <h:inputText id="id-id" value="#{imovel.id}" class="form-control" validatorMessage="Título é Obrigatório">
+                        <f:validateRequired />
+                    </h:inputText>
                 </div>
             </div>
+            <br/>
+            <br/>
+            <br/>
             <div class="form-group">
-                <h:outputLabel for="email" class="control-label col-sm-2">Your Email</h:outputLabel>
+                <h:outputLabel for="titulo" class="control-label col-sm-4">Título do Imóvel</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputText id="email-id" value="#{editUser.email}" class="form-control"/>
+                    <h:inputText id="name-id" value="#{imovel.titulo}" class="form-control" validatorMessage="Título é Obrigatório">
+                        <f:validateRequired />
+                    </h:inputText>
                 </div>
             </div>
+            <br/>
+            <br/>
             <div class="form-group">
-                <h:outputLabel for="password" class="control-label col-sm-2">Password</h:outputLabel>
+                <h:outputLabel for="endereco" class="control-label col-sm-4">Endereço do Imóvel</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputSecret id="password-id" value="#{editUser.password}" class="form-control"/>
+                    <h:inputText id="endereco-id" value="#{imovel.endereco}" class="form-control" validatorMessage="Endereço é obrigatório">
+                        <f:validateRequired/>
+                    </h:inputText>
                 </div>
             </div>
+            <br/>
+            <br/>
             <div class="form-group">
-                <h:outputLabel for="gender" class="control-label col-sm-2">Gender</h:outputLabel>
+                <h:outputLabel for="quartos" class="control-label col-sm-4">Quantidade de quartos</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:selectOneRadio value="#{editUser.gender}">
-                        <f:selectItem itemValue="M" itemLabel="Male" />
-                        <f:selectItem itemValue="F" itemLabel="Female" />
-                    </h:selectOneRadio>
+                    <h:inputText type="number" id="quartos-id" value="#{imovel.quartos}" class="form-control" validatorMessage="Quantidade de quartos é obrigatório" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;">
+                        <f:validateRequired/>
+                    </h:inputText>
                 </div>
             </div>
+            <br/>
+            <br/>
             <div class="form-group">
-                <h:outputLabel for="address" class="control-label col-sm-2">Address</h:outputLabel>
+                <h:outputLabel for="garagem" class="control-label col-sm-4">Possui Garagem ?</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputTextarea value="#{editUser.address}" cols="50" rows="5" class="form-control"/>
+                    <h:selectBooleanCheckbox value="#{imovel.garagem}" id="garagem" /> 
+                </div>
+            </div>            
+            <br/>
+            <br/>
+            <div class="form-group">
+                <h:outputLabel for="garagem" class="control-label col-sm-4">Possui Piscina ?</h:outputLabel>
+                <div class="col-sm-4">
+                    <h:selectBooleanCheckbox value="#{imovel.piscina}" id="piscina" /> 
                 </div>
             </div>
+            <br/>
+            <br/>
             <div class="form-group">
-                <div class="col-sm-2"></div>
+                <div class="col-sm-4"></div>
                 <div class="col-sm-4">
-                    <center><h:commandButton value="Update" action="#{user.update(editUser)}" class="btn btn-primary" style="width: 80px;"></h:commandButton></center>
+                    <div class="col-sm-6">
+                        <h:commandButton value="Atualizar Imóvel" action="#{imovel.update()}" class="btn btn-success"></h:commandButton>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="col-sm-6">
+                        <h:link outcome="index" value="Ver Imóveis Cadastrados" class="btn btn-primary" />
+                    </div>
                 </div>
             </div>
         </h:form>
