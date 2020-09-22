@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset>
+    <TB_USUARIO num_versao="1" dtype="ADMIN" email ="rosaalexandrino@gmail.com" senha = "hBuxA23" primeiro_nome = "Rosa" ultimo_nome = "Alexandrino" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="ADMIN" email ="igormoraes@gmail.com" senha = "LbyI20" primeiro_nome = "Igor" ultimo_nome = "Moraes" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="Usuario" email ="joanamendonca@gmail.com" senha = "aopHMXX9" primeiro_nome = "Joana" ultimo_nome = "Mendonça" habilitado = "0" />
+    <TB_USUARIO num_versao="1" dtype="Usuario" email ="mariojorge@outlook.com" senha = "2pKbVjpe" primeiro_nome = "Mario" ultimo_nome = "Jorge" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="ADMIN" email ="maiconrodrigues@bol.com.br" senha = "MYJZf8gQ" primeiro_nome = "Maicon" ultimo_nome = "Rodrigues" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="ADMIN" email ="joicesantos@hotmail.com" senha = "oB6LE1eF" primeiro_nome = "Joice" ultimo_nome = "Santos" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="Usuario" email ="mariaaparecida@live.com" senha = "oPpP2rZN" primeiro_nome = "Maria" ultimo_nome = "Aparecida" habilitado = "0" />
+    <TB_USUARIO num_versao="1" dtype="Usuario" email ="fernandotads@uol.com.br" senha = "j8NsFXNS" primeiro_nome = "Fernando" ultimo_nome = "Bezerra" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="Usuario" email ="alanaarruda@yahoo.com.br" senha = "u5mrl9KL" primeiro_nome = "Alana" ultimo_nome = "Arruda" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="ADMIN" email ="marcoslima@yahoo.com" senha = "hdm1IwmZ" primeiro_nome = "Marcos" ultimo_nome = "Lima" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="ADMIN" email ="igorribas@live.com" senha = "gHaiID" primeiro_nome = "Igor" ultimo_nome = "Ribas" habilitado = "0" />
+    <TB_USUARIO num_versao="1" dtype="Usuario" email ="cassiabatista@uol.com.br" senha = "PmLLNS" primeiro_nome = "Cássia" ultimo_nome = "Batista" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="ADMIN" email ="gustavogarcia@yahoo.com.br" senha = "NamSDN" primeiro_nome = "Gustavo" ultimo_nome = "Garcia" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="ADMIN" email ="brunomachado@yahoo.com" senha = "Uiab90" primeiro_nome = "Bruno" ultimo_nome = "Machado" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="Usuario" email ="marcosmedeiros@yahoo.com.br" senha = "A976snsj" primeiro_nome = "Marcos" ultimo_nome = "Medeiros" habilitado = "1" />
+    <TB_USUARIO num_versao="1" dtype="Usuario" email ="nayarapinheiro@yahoo.com" senha = "654JhG" primeiro_nome = "Nayara" ultimo_nome = "Pinheiro" habilitado = "1" />
+    
+    <TB_ADMINISTRADOR num_versao="1" id_admin = "1" matricula = "96712385" cargo = "1" />
+    <TB_ADMINISTRADOR num_versao="1" id_admin = "2" matricula = "96785321" cargo = "3" />
+    <TB_ADMINISTRADOR num_versao="1" id_admin = "5" matricula = "96532441" cargo = "3" />
+    <TB_ADMINISTRADOR num_versao="1" id_admin = "6" matricula = "96225321" cargo = "2" />
+    <TB_ADMINISTRADOR num_versao="1" id_admin = "10" matricula = "96717300" cargo = "1" />
+    <TB_ADMINISTRADOR num_versao="1" id_admin = "11" matricula = "96785211" cargo = "3" />
+    <TB_ADMINISTRADOR num_versao="1" id_admin = "13" matricula = "96534862" cargo = "3" />
+    <TB_ADMINISTRADOR num_versao="1" id_admin = "14" matricula = "96221133" cargo = "2" />
+    
+    <TB_TELEFONE num_versao="1" usuario_id="1" numero="995201778" ddd="081"/>
+    <TB_TELEFONE num_versao="1" usuario_id="1" numero="923758461" ddd="081"/> 
+    <TB_TELEFONE num_versao="1" usuario_id="1" numero="987452100" ddd="081"/>
+    <TB_TELEFONE num_versao="1" usuario_id="1" numero="985203164" ddd="081"/> 
+      
+    <TB_ENDERECO num_versao="1" rua = "Rua Leônidas Cravo Gama" numero = "120" bairro = "Afogados" cidade = "Recife" CEP = "50770-000" estado="PE" />
+    <TB_ENDERECO num_versao="1" rua = "Rua Armando Silva" numero = "95" bairro = "Afogados" cidade = "Recife" CEP = "50830-500" estado="PE"/>
+    <TB_ENDERECO num_versao="1" rua = "Rua do Cacique" numero = "40" bairro = "Ibura" cidade = "Recife" CEP = "51230-000" estado="PE"/>
+    <TB_ENDERECO num_versao="1" rua = "Rua da Ladeira" numero = "125" bairro = "Ibura" cidade = "Recife" CEP = "54240-695" estado="PE"/>
+    <TB_ENDERECO num_versao="1" rua = "Rua Córrego do Joaquim" numero = "20" bairro = "Nova Descoberta" cidade = "Recife" CEP = "52091-300" estado="PE"/>
+    <TB_ENDERECO num_versao="1" rua = "Rua Nossa Senhora da Pompéia" numero = "200" bairro = "Encruzilhada" cidade = "Recife" CEP = "52041-160" estado="PE"/>
+       
+    <TB_IMOVEL num_versao="1" id_endereco = "1" id_usuario = "1" quartos = "2" banheiros = "2" salas = "1" descricao = "Descricao 1" tipo_imovel = "1" valor = "500.00" />
+	<TB_IMOVEL num_versao="1" id_endereco = "2" id_usuario = "2" quartos = "2" banheiros = "2" salas = "1" descricao = "Descricao 2" tipo_imovel = "2" valor = "600.00" />
+	<TB_IMOVEL num_versao="1" id_endereco = "3" id_usuario = "3" quartos = "2" banheiros = "2" salas = "1" descricao = "Descricao 3" tipo_imovel = "1" valor = "700.00" />
+	<TB_IMOVEL num_versao="1" id_endereco = "4" id_usuario = "4" quartos = "2" banheiros = "2" salas = "1" descricao = "Descricao 4" tipo_imovel = "2" valor = "800.00" />
+	<TB_IMOVEL num_versao="1" id_endereco = "5" id_usuario = "4" quartos = "2" banheiros = "2" salas = "1" descricao = "Descricao 5" tipo_imovel = "1" valor = "800.00" />
+	<TB_IMOVEL num_versao="1" id_endereco = "6" id_usuario = "5" quartos = "0" banheiros = "0" salas = "0" descricao = "Terreno de 2000 m2, proximo ao Parque Dona Lindu" tipo_imovel = "3" valor = "1000.00" />
+
+</dataset>

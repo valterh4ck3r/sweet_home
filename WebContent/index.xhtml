@@ -1,79 +1,52 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-    <h:head>
-        <title>Imóveis</title>
-        <h:outputStylesheet name="/css/bootstrap.min.css"/>
-        <h:outputStylesheet name="/css/main.css"/>
-        <style type="text/css">
-            table {
-                border-collapse: collapse;
-                width: 100%;
-            }
-            th, td {
-                text-align: left;
-                padding: 8px;
-            }
 
-            tr:nth-child(even){background-color: #f2f2f2}
-            th {
-                background-color: #4CAF50;
-                color: white;
-            }
-        </style>
-    </h:head>
-    <h:body>
-        <h:form>
-            <center>
-                <h2><h:outputText value="Imóveis"/></h2>
-            </center>
-            <br/>         
-            <br/>         
-            <br/>  
-            <h:dataTable binding="#{table}" value="#{imovel.list()}" var="i" class="table table-striped table-hover table-bordered" >
-                <h:column>
-                    <f:facet name="header">ID</f:facet>
-                    <h:outputText value="#{table.rowIndex + 1}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Título do Imóvel</f:facet>
-                    <h:outputText value="#{i.titulo}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Endereço</f:facet>
-                    <h:outputText value="#{i.endereco}"/>
-                </h:column>
-                 <h:column>
-                    <f:facet name="header">Quartos</f:facet>
-                    <h:outputText value="#{i.quartos}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Piscina</f:facet>
-                    <h:outputText value="#{i.piscina}"/>
-                </h:column>
-                 <h:column>
-                    <f:facet name="header">Garagem</f:facet>
-                    <h:outputText value="#{i.piscina}"/>
-                </h:column>
-                <h:column> 
-                    <f:facet name="header">Atualizar</f:facet>
-                    <h:commandButton action = "#{imovel.edit(i)}" value="Atualizar" class="btn btn-primary"> 
-                    </h:commandButton>
-                </h:column>
-                <h:column> 
-                    <f:facet name="header">Excluir</f:facet>
-                    <h:commandButton action = "#{imovel.delete(i)}" value="Excluir" class="btn btn-danger"> 
-                    </h:commandButton>
-                </h:column>
-            </h:dataTable>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <center><h:commandButton action = "create.xhtml?faces-redirect=true" value="Adicionar Imóvel" class="btn btn-success"></h:commandButton> </center>
-        </h:form>
-    </h:body>
+           
+    <f:view contentType="text/html">
+        <h:head>
+            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+            
+        </h:head>
+        
+
+        <h:body >
+            
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="0" resizable="true" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                
+                <p:layoutUnit position="west" size="210" header="Servicos" collapsible="true">
+                    <h:form>
+                    <p:menu>
+                        <p:submenu label="Opções">
+                            <p:menuitem  value="Solicitar serviço" />
+                            
+                        </p:submenu>
+
+                    </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                                                          
+                        
+                </p:layoutUnit>
+
+            </p:layout>
+            
+        </h:body>
+
+    </f:view>
 </html>
+
