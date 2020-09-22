@@ -3,6 +3,7 @@
   <persistence-unit name="pdsc" transaction-type="JTA">
     <jta-data-source>jdbc/__default</jta-data-source>
     <class>sweethome.Imovel</class>
+    <class>sweethome.Usuario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
