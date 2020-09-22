@@ -40,15 +40,12 @@ public class Usuario implements Serializable{
     @GeneratedValue
     private Long id;
     
-	@NotNull
     @Column(name = "TXT_NOME")
     private String nome;
     
-	@NotNull
     @Column(name = "TXT_SENHA")
     private String senha;
     
-	@NotNull
     @Column(name = "TXT_EMAIL")
     private String email;
         
