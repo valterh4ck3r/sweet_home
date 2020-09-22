@@ -191,6 +191,8 @@ public class Imovel implements Serializable {
 	public void setGaragem(boolean garagem) {
 		this.garagem = garagem;
 	}
+	
+	
 
 	@Override
     public int hashCode() {
