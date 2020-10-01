@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+    <f:view>
+          
+    <h:head>        
+        <title>Sweet Home</title>
+        
+    </h:head>
+    <h:body onload="#{dataLoader.carregarDados()}" >
+        
+                	
+        <h4>Sweet Home</h4>
+        <h:form>
+            <h:panelGrid id="formlogin">
+                <h:outputText value="Login:" />
+                <p:inputText id="email" value="#{login.email}" />      
+
+                <h:outputText value="Senha:" />
+                <p:password id="senha" value="#{login.senha}"/>
+            </h:panelGrid>
+            <p></p>
+            
+            <h:commandButton ajax="false"
+                     action="#{login.fazerLogin}" value="Entrar" />
+            <p:outputLabel binding="#{login.mybutton}" id="mybutton" />
+            <a style="color:red; font-size: 20px"><h:message for="mybutton" /></a>
+            
+        </h:form>
+               
+        <p>
+            <h:link outcome="indexCadastro" value="Ainda não tem cadastro? Clique aqui!" />
+        </p>
+        
+    </h:body>
+
+	</f:view>
+
+
+</html>
+
