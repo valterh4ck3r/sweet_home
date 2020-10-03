@@ -104,39 +104,44 @@ public class CadastroImovel implements Serializable {
         imovel.setUsuario(usuarioLogado);
         
         imovelServico.persistir(imovel);    
-        resp = "Imóvel cadastrado com sucesso!";
+        resp = "Imï¿½vel cadastrado com sucesso!";
         
         return "cadastro";
     }
     
-	public void carregarImoveis() {	
+	public List<Imovel> carregarImoveis() {	
 				
-		List<Imovel> imoveisFiltrados = new ArrayList<Imovel>();
+		List<Imovel> imoveisFiltrados = new ArrayList<Imovel>();		
+		List<Imovel> imoveisFiltradosPiscina = new ArrayList<Imovel>();
 		
 		List<Imovel> imoveis = imovelServico.recuperarImoveis();
 		
 		if(filtrarPiscina) {
 			for(Imovel i : imoveis) {
 				if(i.isPiscina()) {
-					imoveisFiltrados.add(i);
+					imoveisFiltradosPiscina.add(i);
 				}				
 			}
 		} else {
 			for(Imovel i : imoveis) {
-				imoveisFiltrados.add(i);			
+				imoveisFiltradosPiscina.add(i);			
 			}
 		}
 		
 		if(filtrarBeiraMar) {
-			for(Imovel i : imoveisFiltrados) {
+			for(Imovel i : imoveisFiltradosPiscina) {
 				if(i.isBeiramar()) {
 					imoveisFiltrados.add(i);
 				}				
 			}
+		} else {
+			imoveisFiltrados = imoveisFiltradosPiscina;
 		}
 						
 		lista = imoveisFiltrados;
 		setLista(imoveisFiltrados);
+
+        return lista;
     
 	}
       

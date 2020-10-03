@@ -58,7 +58,7 @@
                         </p>
                         <br/>
                         <p>Filtrar Imóveis com Beira Mar 
-                            <h:selectBooleanCheckbox title="Filtrar Imóveis Beira Mar" value="#{cadastroImovel.filtrarPiscina}" id="chexkboxBeiraMar" /> 
+                            <h:selectBooleanCheckbox title="Filtrar Imóveis Beira Mar" value="#{cadastroImovel.filtrarBeiraMar}" id="chexkboxBeiraMar" /> 
                         </p>
                         <br/>
                         <br/>
@@ -72,7 +72,7 @@
                                       
                     <h:form>
                        
-                            <p:dataTable id="imoveis" var="listaImovel" value="#{cadastroImovel.lista}" rowKey="#{listaImovel.id}" >
+                            <p:dataTable id="imoveis" var="listaImovel" value="#{cadastroImovel.carregarImoveis()}" rowKey="#{listaImovel.id}" >
                                 <f:facet name="header">
                                     Imóveis 
                                 </f:facet>  
