@@ -110,11 +110,19 @@ public class Imovel extends Entidade {
     @JoinColumn(name = "ID_ENDERECO  ", referencedColumnName = "ID")
     private Endereco endereco;
     
+    @NotNull
+    @Column(name = "PISCINA")
+    private boolean piscina;
+    
+    @NotNull
+    @Column(name = "BEIRAMAR")
+    private boolean beiramar;
+    
     public Imovel() {
     	
     }
     
-    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco) {
+    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean piscina , boolean beiramar) {
     	
     	this.id = id;
     	this.quartos= quartos;
@@ -126,6 +134,8 @@ public class Imovel extends Entidade {
     	this.usuario = usuario;
     	this.endereco = endereco;    	
     	this.imagens = imagens;
+    	this.piscina = piscina;
+    	this.beiramar = beiramar;
     }
     
     public Long getId() {
@@ -208,8 +218,24 @@ public class Imovel extends Entidade {
         this.endereco = endereco;
         //this.endereco.setImovel(this);
     }
-    
-    public static byte[] imagetoBytes(String name) {
+
+    public boolean isPiscina() {
+		return piscina;
+	}
+
+	public void setPiscina(boolean piscina) {
+		this.piscina = piscina;
+	}
+
+	public boolean isBeiramar() {
+		return beiramar;
+	}
+
+	public void setBeiramar(boolean beiramar) {
+		this.beiramar = beiramar;
+	}
+
+	public static byte[] imagetoBytes(String name) {
     	
     	byte[] imageInByte = null;
     	

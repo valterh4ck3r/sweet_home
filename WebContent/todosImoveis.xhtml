@@ -47,7 +47,27 @@
 					    <h:inputFile value="#{cadastroImovel.imageFile}" />
 					    <h:commandButton value="Submit" action="#{cadastroImovel.salvarImagem}" />
 					    <h:messages />
+                    </h:form>
+                    
+                    <br/>
+                    <br/>
+
+                    <h:form>
+                        <p>Filtrar Imóveis com Piscina 
+                            <h:selectBooleanCheckbox title="Filtrar Imóveis com Piscina" value="#{cadastroImovel.filtrarPiscina}" id="chexkboxPiscina" /> 
+                        </p>
+                        <br/>
+                        <p>Filtrar Imóveis com Beira Mar 
+                            <h:selectBooleanCheckbox title="Filtrar Imóveis Beira Mar" value="#{cadastroImovel.filtrarPiscina}" id="chexkboxBeiraMar" /> 
+                        </p>
+                        <br/>
+                        <br/>
+                        <h:commandButton value="Pesquisar" action="#{cadastroImovel.carregarImoveis}" />
+					    <h:messages />
 					</h:form>
+
+                    <br/>
+                    <br/>
                                                                      
                                       
                     <h:form>

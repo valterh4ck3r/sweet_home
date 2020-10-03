@@ -70,6 +70,9 @@ public class CadastroImovel implements Serializable {
     private String estado = null;
     private static List<Imovel> lista = null;
     private static Endereco selected = null; 
+    
+    private boolean filtrarPiscina = false;
+    private boolean filtrarBeiraMar = false;
         
     private Part imageFile; 
     
@@ -105,6 +108,37 @@ public class CadastroImovel implements Serializable {
         
         return "cadastro";
     }
+    
+	public void carregarImoveis() {	
+				
+		List<Imovel> imoveisFiltrados = new ArrayList<Imovel>();
+		
+		List<Imovel> imoveis = imovelServico.recuperarImoveis();
+		
+		if(filtrarPiscina) {
+			for(Imovel i : imoveis) {
+				if(i.isPiscina()) {
+					imoveisFiltrados.add(i);
+				}				
+			}
+		} else {
+			for(Imovel i : imoveis) {
+				imoveisFiltrados.add(i);			
+			}
+		}
+		
+		if(filtrarBeiraMar) {
+			for(Imovel i : imoveisFiltrados) {
+				if(i.isBeiramar()) {
+					imoveisFiltrados.add(i);
+				}				
+			}
+		}
+						
+		lista = imoveisFiltrados;
+		setLista(imoveisFiltrados);
+    
+	}
       
      
     public void excluir(Imovel imovel) {
@@ -271,5 +305,27 @@ public class CadastroImovel implements Serializable {
     public void setResp(String resp) {
         this.resp = resp;
     }
+
+	public boolean isFiltrarPiscina() {
+		return filtrarPiscina;
+	}
+
+	public void setFiltrarPiscina(boolean filtrarPiscina) {
+		this.filtrarPiscina = filtrarPiscina;
+	}
+
+	public boolean isFiltrarBeiraMar() {
+		return filtrarBeiraMar;
+	}
+
+	public void setFiltrarBeiraMar(boolean filtrarBeiraMar) {
+		this.filtrarBeiraMar = filtrarBeiraMar;
+	}
+
+	public static void setLista(List<Imovel> lista) {
+		CadastroImovel.lista = lista;
+	}
+    
+    
     
 }
