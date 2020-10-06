@@ -71,6 +71,7 @@ public class CadastroImovel implements Serializable {
     private static List<Imovel> lista = null;
     private static Endereco selected = null; 
     
+    private boolean filtrarGaragem = false;
     private boolean filtrarPiscina = false;
     private boolean filtrarBeiraMar = false;
     private boolean filtrarSalaReuniao = false;
@@ -113,44 +114,69 @@ public class CadastroImovel implements Serializable {
 	public List<Imovel> carregarImoveis() {	
 				
 		List<Imovel> imoveisFiltrados = new ArrayList<Imovel>();		
-		List<Imovel> imoveisFiltradosPiscina = new ArrayList<Imovel>();
-		List<Imovel> imoveisFiltradosReuniao = new ArrayList<Imovel>();
+		List<Imovel> imoveisFiltradosGaragem = new ArrayList<Imovel>();
+        List<Imovel> imoveisFiltradosPiscina = new ArrayList<Imovel>();
+        List<Imovel> imoveisFiltradosBeiraMar = new ArrayList<Imovel>();
+		List<Imovel> imoveisFiltradosSalaReuniao = new ArrayList<Imovel>();
 		
 		List<Imovel> imoveis = imovelServico.recuperarImoveis();
 		
-		if(filtrarPiscina) {
+		if(filtrarGaragem) {
 			for(Imovel i : imoveis) {
+				if(i.isGaragem()) {
+					imoveisFiltradosGaragem.add(i);
+				}				
+			}
+		} else {
+			for(Imovel i : imoveis) {
+				imoveisFiltradosGaragem.add(i);			
+			}
+		}
+                
+        if(filtrarPiscina) {
+			for(Imovel i : imoveisFiltradosGaragem) {
 				if(i.isPiscina()) {
 					imoveisFiltradosPiscina.add(i);
 				}				
 			}
 		} else {
-			for(Imovel i : imoveis) {
+			for(Imovel i : imoveisFiltradosGaragem) {
 				imoveisFiltradosPiscina.add(i);			
 			}
 		}
+        
+        
 		
 		if(filtrarBeiraMar) {
 			for(Imovel i : imoveisFiltradosPiscina) {
 				if(i.isBeiramar()) {
-					imoveisFiltrados.add(i);
+					imoveisFiltradosBeiraMar.add(i);
 				}				
 			}
 		} else {
-			imoveisFiltrados = imoveisFiltradosPiscina;
-			
-		}if(filtrarSalaReuniao) {
 			for(Imovel i : imoveisFiltradosPiscina) {
-				if(i.isSalaReuniao()) {
-					imoveisFiltrados.add(i);
-				}				
+				imoveisFiltradosBeiraMar.add(i);			
 			}
 		}
-						
-		lista = imoveisFiltrados;
-		setLista(imoveisFiltrados);
+                
+       if(filtrarSalaReuniao) {
+			for(Imovel i : imoveisFiltradosBeiraMar) {
+				if(i.isSalaReuniao()) {
+					imoveisFiltradosSalaReuniao.add(i);
+				}				
+			}
+		} else {
+			for(Imovel i : imoveisFiltradosBeiraMar) {
+				imoveisFiltradosSalaReuniao.add(i);			
+			}
+		}
+        
+        imoveisFiltrados = imoveisFiltradosSalaReuniao;
+        
+		lista = imoveisFiltradosSalaReuniao;
+		setLista(imoveisFiltradosSalaReuniao);
 
-        return lista;
+        return imoveisFiltradosSalaReuniao;
     
 	}
       
@@ -320,6 +346,14 @@ public class CadastroImovel implements Serializable {
         this.resp = resp;
     }
 
+	public boolean isFiltrarGaragem() {
+		return filtrarGaragem;
+	}
+
+	public void setFiltrarGaragem(boolean filtrarGaragem) {
+		this.filtrarGaragem = filtrarGaragem;
+	}
+
 	public boolean isFiltrarPiscina() {
 		return filtrarPiscina;
 	}
@@ -335,19 +369,17 @@ public class CadastroImovel implements Serializable {
 	public void setFiltrarBeiraMar(boolean filtrarBeiraMar) {
 		this.filtrarBeiraMar = filtrarBeiraMar;
 	}
-	
+
 	public boolean isFiltrarSalaReuniao() {
 		return filtrarSalaReuniao;
 	}
 
 	public void setFiltrarSalaReuniao(boolean filtrarSalaReuniao) {
-		this.filtrarBeiraMar = filtrarSalaReuniao;
+		this.filtrarSalaReuniao = filtrarSalaReuniao;
 	}
 
 	public static void setLista(List<Imovel> lista) {
 		CadastroImovel.lista = lista;
 	}
-    
-    
     
 }

@@ -115,6 +115,10 @@ public class Imovel extends Entidade {
     private Endereco endereco;
     
     @NotNull
+    @Column(name = "GARAGEM")
+    private boolean garagem;
+    
+    @NotNull
     @Column(name = "PISCINA")
     private boolean piscina;
     
@@ -130,7 +134,7 @@ public class Imovel extends Entidade {
     	
     }
     
-    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean piscina , boolean beiramar, boolean salareuniao) {
+    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean garagem, boolean piscina , boolean beiramar, boolean salareuniao) {
     	
     	this.id = id;
     	this.quartos= quartos;
@@ -142,7 +146,8 @@ public class Imovel extends Entidade {
     	this.usuario = usuario;
     	this.endereco = endereco;    	
     	this.imagens = imagens;
-    	this.piscina = piscina;
+    	this.garagem = garagem;
+        this.piscina = piscina;
     	this.beiramar = beiramar;
     	this.salareuniao = salareuniao;
     }
@@ -228,6 +233,15 @@ public class Imovel extends Entidade {
         //this.endereco.setImovel(this);
     }
 
+    public boolean isGaragem() {
+		return garagem;
+	}
+
+	public void setGaragem(boolean garagem) {
+		this.garagem = garagem;
+	}
+
+    
     public boolean isPiscina() {
 		return piscina;
 	}
