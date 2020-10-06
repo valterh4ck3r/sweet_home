@@ -73,6 +73,7 @@ public class CadastroImovel implements Serializable {
     
     private boolean filtrarPiscina = false;
     private boolean filtrarBeiraMar = false;
+    private boolean filtrarSalaReuniao = false;
         
     private Part imageFile; 
     
@@ -113,6 +114,7 @@ public class CadastroImovel implements Serializable {
 				
 		List<Imovel> imoveisFiltrados = new ArrayList<Imovel>();		
 		List<Imovel> imoveisFiltradosPiscina = new ArrayList<Imovel>();
+		List<Imovel> imoveisFiltradosReuniao = new ArrayList<Imovel>();
 		
 		List<Imovel> imoveis = imovelServico.recuperarImoveis();
 		
@@ -136,6 +138,13 @@ public class CadastroImovel implements Serializable {
 			}
 		} else {
 			imoveisFiltrados = imoveisFiltradosPiscina;
+			
+		}if(filtrarSalaReuniao) {
+			for(Imovel i : imoveisFiltradosPiscina) {
+				if(i.isSalaReuniao()) {
+					imoveisFiltrados.add(i);
+				}				
+			}
 		}
 						
 		lista = imoveisFiltrados;
@@ -325,6 +334,14 @@ public class CadastroImovel implements Serializable {
 
 	public void setFiltrarBeiraMar(boolean filtrarBeiraMar) {
 		this.filtrarBeiraMar = filtrarBeiraMar;
+	}
+	
+	public boolean isFiltrarSalaReuniao() {
+		return filtrarSalaReuniao;
+	}
+
+	public void setFiltrarSalaReuniao(boolean filtrarSalaReuniao) {
+		this.filtrarBeiraMar = filtrarSalaReuniao;
 	}
 
 	public static void setLista(List<Imovel> lista) {

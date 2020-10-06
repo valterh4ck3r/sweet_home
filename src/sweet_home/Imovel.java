@@ -45,7 +45,11 @@ import org.primefaces.model.DefaultStreamedContent;
             @NamedQuery(
                     name = "Imovel.RecuperarImoveis",
                     query = "SELECT i FROM Imovel i"
-            )   
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorSalaReuniao",
+                    query = "SELECT r FROM Imovel r WHERE r.salareuniao = ?1"
+            ),
           
         }
 )
@@ -118,11 +122,15 @@ public class Imovel extends Entidade {
     @Column(name = "BEIRAMAR")
     private boolean beiramar;
     
+    @NotNull
+    @Column(name = "SALAREUNIAO")
+    private boolean salareuniao;
+    
     public Imovel() {
     	
     }
     
-    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean piscina , boolean beiramar) {
+    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean piscina , boolean beiramar, boolean salareuniao) {
     	
     	this.id = id;
     	this.quartos= quartos;
@@ -136,6 +144,7 @@ public class Imovel extends Entidade {
     	this.imagens = imagens;
     	this.piscina = piscina;
     	this.beiramar = beiramar;
+    	this.salareuniao = salareuniao;
     }
     
     public Long getId() {
@@ -233,6 +242,14 @@ public class Imovel extends Entidade {
 
 	public void setBeiramar(boolean beiramar) {
 		this.beiramar = beiramar;
+	}
+	
+	public boolean isSalaReuniao() {
+		return salareuniao;
+	}
+
+	public void setSalaReuniao(boolean salareuniao) {
+		this.salareuniao = salareuniao;
 	}
 
 	public static byte[] imagetoBytes(String name) {

@@ -52,6 +52,11 @@ public class ImovelServico extends Servico<Imovel> {
     public List<Imovel> consultarPorBanheiros(@NotNull int banheiros) {
         return super.consultarEntidades(new Object[] {banheiros}, "Imovel.RecuperarPorBanheiros");
     }
+    
+    @TransactionAttribute(SUPPORTS) 
+    public List<Imovel> consultarPorSalaReuniao(@NotNull int salareuniao) {
+        return super.consultarEntidades(new Object[] {salareuniao}, "Imovel.RecuperarPorSalaReuniao");
+    }
 
 }
 
