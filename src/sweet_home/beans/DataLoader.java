@@ -109,20 +109,34 @@ public class DataLoader implements Serializable {
 		Endereco e6 = new Endereco(null, "Rua Nossa Senhora da Pompéia", "200", "Encruzilhada", "Recife", "PE", "52041-160", null);
 		Endereco e7 = new Endereco(null, "Rua Conselheiro Portella", "240", "Espinheiro", "Recife", "PE", "52240-400", null);
 		Endereco e8 = new Endereco(null, "Rua Braz Moscow", "93", "Piedade", "Jaboatão dos Guararapes", "PE", "54420-140", null);	
+		Endereco e9 = new Endereco(null, "Rua Bonifácio", "10", "Centro", "Recife", "PE", "50830-500", null);
+		Endereco e10 = new Endereco(null, "Rua dos Salgueiros", "20", "Centro", "Recife", "PE", "51230-000", null);
+		Endereco e11 = new Endereco(null, "Rua do Derby", "30", "Derby", "Recife", "PE", "54240-695", null);
+		Endereco e12 = new Endereco(null, "Rua do Beco", "50", "Nova Descoberta", "Recife", "PE", "52091-300", null);
+		Endereco e13 = new Endereco(null, "Rua Aparecida", "10", "Beberibe", "Recife", "PE", "52041-160", null);
+		Endereco e14 = new Endereco(null, "Rua Padre Benfica", "155", "Espinheiro", "Recife", "PE", "52240-400", null);
+		Endereco e15 = new Endereco(null, "Rua Berlim Brasileira", "93", "Aflitos", "Jaboatão dos Guararapes", "PE", "54420-140", null);	
 		
 		List<byte[]> l = new ArrayList<>();
 		
 		// Inserir imagem de acordo com o deploy
 		for(int i = 1; i < 22; i++) l.add(Imovel.imagetoBytes("C:\\imagens\\"+i+".jpg"));		
 		
-		imovelServico.persistir(new Imovel(null, 3, 2, 2, "Descricao 1", 1, 1000.5, l.subList(0, 3), usuarios.get(0), e1 , true , true, true , true));
-		imovelServico.persistir(new Imovel(null, 2, 3, 4, "Descricao 2", 2 , 1400, l.subList(3, 6), usuarios.get(0), e2, false , false, false, true));
-		imovelServico.persistir(new Imovel(null, 6, 2, 2, "Descricao 3", 2 , 2200, l.subList(6, 9), usuarios.get(3), e3, false , false, true, false));
-		imovelServico.persistir(new Imovel(null, 5, 1, 1, "Descricao 4", 1 , 500, l.subList(9, 12), usuarios.get(5), e4, false , false, false, false));
-		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 5", 2 , 1800, l.subList(12, 15), usuarios.get(5), e5, false , true, true, true));
-		imovelServico.persistir(new Imovel(null, 2, 2, 2, "Descricao 6", 2 , 3000, l.subList(15, 18), usuarios.get(2), e6, false , true, false, false));
-		imovelServico.persistir(new Imovel(null, 4, 2, 2, "Descricao 7", 2 , 2500, l.subList(18, 20), usuarios.get(8), e7, true , false, true, true));
-		imovelServico.persistir(new Imovel(null, 3, 0, 0, "Descricao 8", 3 , 1000, l.subList(20, 21), usuarios.get(9), e8, true , false, true, false));
+		imovelServico.persistir(new Imovel(null, 3, 2, 2, "Descricao 1", 1, 1000.5, l.subList(0, 3), usuarios.get(0), e1 , true , true, true , true , 20));
+		imovelServico.persistir(new Imovel(null, 2, 3, 4, "Descricao 2", 2 , 1400, l.subList(3, 6), usuarios.get(0), e2, false , false, false, true , 25));
+		imovelServico.persistir(new Imovel(null, 6, 2, 2, "Descricao 3", 2 , 2200, l.subList(6, 9), usuarios.get(3), e3, false , false, true, false, 30));
+		imovelServico.persistir(new Imovel(null, 5, 1, 1, "Descricao 4", 1 , 500, l.subList(9, 12), usuarios.get(5), e4, false , false, false, false, 40));
+		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 5", 2 , 1800, l.subList(12, 15), usuarios.get(5), e5, false , true, true, true, 45));
+		imovelServico.persistir(new Imovel(null, 2, 2, 2, "Descricao 6", 2 , 3000, l.subList(15, 18), usuarios.get(2), e6, false , true, false, false, 50));
+		imovelServico.persistir(new Imovel(null, 4, 2, 2, "Descricao 7", 2 , 2500, l.subList(18, 20), usuarios.get(8), e7, true , false, true, true, 15));
+		imovelServico.persistir(new Imovel(null, 3, 0, 0, "Descricao 8", 3 , 1000, l.subList(20, 21), usuarios.get(9), e8, true , false, true, false, 15));
+		imovelServico.persistir(new Imovel(null, 4, 0, 0, "Descricao 9", 3 , 1000, l.subList(20, 21), usuarios.get(9), e9, true , false, true, false, 20));
+		imovelServico.persistir(new Imovel(null, 2, 0, 0, "Descricao 10", 2 , 1000, l.subList(20, 21), usuarios.get(9), e10, true , false, true, false, 25));
+		imovelServico.persistir(new Imovel(null, 1, 0, 0, "Descricao 11", 1 , 1000, l.subList(20, 21), usuarios.get(9), e11, false , true, false, true, 25));
+		imovelServico.persistir(new Imovel(null, 1, 0, 0, "Descricao 12", 2 , 1000, l.subList(20, 21), usuarios.get(9), e12, true , false, false, false, 40));
+		imovelServico.persistir(new Imovel(null, 2, 0, 0, "Descricao 13", 3 , 1000, l.subList(20, 21), usuarios.get(9), e13, false , true, true, true, 15));
+		imovelServico.persistir(new Imovel(null, 6, 0, 0, "Descricao 14", 1 , 1000, l.subList(20, 21), usuarios.get(9), e14, false , false, true, false, 50));
+		imovelServico.persistir(new Imovel(null, 5, 0, 0, "Descricao 15", 3 , 1000, l.subList(20, 21), usuarios.get(9), e15, true , true, false, true, 15));
 	}
 			
 	

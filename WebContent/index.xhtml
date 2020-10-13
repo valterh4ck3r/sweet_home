@@ -64,7 +64,7 @@
                         <br/>
                         <br/>
                         
-                        Selecione a Quantidade de Quartos:   
+                        Filtrar por Quantidade de Quartos:   
                             <h:selectOneMenu value="#{cadastroImovel.filtrarQuantidadeQuartos}">
                                 <f:selectItem itemValue="0" itemLabel="Selecione" />
                                 <f:selectItem itemValue="1" itemLabel="1 quarto" />
@@ -77,7 +77,30 @@
                         
 
                         <br/>
+                        <br/>                        
                         <br/>
+                        <br/>
+
+                        Filtrar por Metros Quadrados  (m²):   
+                        <h:selectOneMenu value="#{cadastroImovel.filtrarMetrosQuadrados}">
+                            <f:selectItem itemValue="0" itemLabel="Selecione" />
+                            <f:selectItem itemValue="15" itemLabel="15 m²" />
+                            <f:selectItem itemValue="20" itemLabel="20 m²" />
+                            <f:selectItem itemValue="25" itemLabel="25 m²" />
+                            <f:selectItem itemValue="30" itemLabel="30 m²" />
+                            <f:selectItem itemValue="35" itemLabel="35 m²" />
+                            <f:selectItem itemValue="40" itemLabel="40 m²" />
+                            <f:selectItem itemValue="45" itemLabel="45 m²" />
+                            <f:selectItem itemValue="50" itemLabel="50 m²" />
+                        </h:selectOneMenu>
+                    
+
+                    <br/>
+                    <br/>                    
+                    <br/>
+                    <br/>
+
+
                         <h:commandButton value="Pesquisar" action="#{cadastroImovel.carregarImoveis}" />
 					    <h:messages />
 					</h:form>
@@ -101,6 +124,9 @@
                                  <p:column style="text-align: center; width: 11%" headerText="Banheiros">
                                     <h:outputText value="#{listaImovel.banheiros}" />
                                 </p:column>  
+                                <p:column style="text-align: center; width: 10%" headerText="Metros quadrados">
+                                    <h:outputText value="#{listaImovel.metros}" />
+                                </p:column> 
                                  <p:column style="text-align: center; width: 19%" headerText="Descrição">
                                     <h:outputText value="#{listaImovel.descricao}" />
                                 </p:column>  

@@ -76,6 +76,7 @@ public class CadastroImovel implements Serializable {
     private boolean filtrarBeiraMar = false;
     private boolean filtrarSalaReuniao = false;
     private String filtrarQuantidadeQuartos = "0";
+    private String filtrarMetrosQuadrados = "0";
         
     private Part imageFile; 
     
@@ -113,7 +114,7 @@ public class CadastroImovel implements Serializable {
     }
     
 	public List<Imovel> carregarImoveis() {				
-		List<Imovel> imoveis = imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos));        
+		List<Imovel> imoveis = imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadrados));        
 		lista = imoveis;
 		setLista(imoveis);
         return imoveis;    
@@ -317,13 +318,21 @@ public class CadastroImovel implements Serializable {
 	}
 
 	
-
 	public String getFiltrarQuantidadeQuartos() {
 		return filtrarQuantidadeQuartos;
 	}
 
 	public void setFiltrarQuantidadeQuartos(String filtrarQuantidadeQuartos) {
 		this.filtrarQuantidadeQuartos = filtrarQuantidadeQuartos;
+	}
+	
+
+	public String getFiltrarMetrosQuadrados() {
+		return filtrarMetrosQuadrados;
+	}
+
+	public void setFiltrarMetrosQuadrados(String filtrarMetrosQuadrados) {
+		this.filtrarMetrosQuadrados = filtrarMetrosQuadrados;
 	}
 
 	public static void setLista(List<Imovel> lista) {

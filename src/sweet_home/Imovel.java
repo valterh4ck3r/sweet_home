@@ -103,8 +103,7 @@ public class Imovel extends Entidade {
     @Lob
     @ElementCollection
     @Column(name = "IMAGENS")
-    private List<byte[]> imagens;
-        
+    private List<byte[]> imagens;        
     
     @NotNull
     @ManyToOne
@@ -130,11 +129,15 @@ public class Imovel extends Entidade {
     @Column(name = "SALAREUNIAO")
     private boolean salareuniao;
     
+    @NotNull
+    @Column(name = "METROS")
+    private int metros;
+    
     public Imovel() {
     	
     }
     
-    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean garagem, boolean piscina , boolean beiramar, boolean salareuniao) {
+    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean garagem, boolean piscina , boolean beiramar, boolean salareuniao , int metros) {
     	
     	this.id = id;
     	this.quartos= quartos;
@@ -150,6 +153,7 @@ public class Imovel extends Entidade {
         this.piscina = piscina;
     	this.beiramar = beiramar;
     	this.salareuniao = salareuniao;
+    	this.metros = metros;
     }
     
     public Long getId() {
@@ -308,5 +312,23 @@ public class Imovel extends Entidade {
         
         return true;
     }
+
+	public boolean isSalareuniao() {
+		return salareuniao;
+	}
+
+	public void setSalareuniao(boolean salareuniao) {
+		this.salareuniao = salareuniao;
+	}
+
+	public int getMetros() {
+		return metros;
+	}
+
+	public void setMetros(int metros) {
+		this.metros = metros;
+	}
+    
+    
     
 }

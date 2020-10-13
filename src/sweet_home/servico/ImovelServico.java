@@ -45,11 +45,11 @@ public class ImovelServico extends Servico<Imovel> {
         return query.getResultList();
     }    
     
-    public List<Imovel> recuperarImoveisComFiltro(boolean garagem, boolean piscina, boolean beiramar, boolean salareuniao , int quartos) {
+    public List<Imovel> recuperarImoveisComFiltro(boolean garagem, boolean piscina, boolean beiramar, boolean salareuniao , int quartos , int metros) {
     	
     	String sqlQuery = "SELECT * FROM TB_IMOVEL i";
     	
-    	if(garagem || piscina || beiramar || salareuniao || quartos > 0) {
+    	if(garagem || piscina || beiramar || salareuniao || quartos > 0 || metros > 0) {
     		sqlQuery+= " WHERE ";
     	}
     	
@@ -83,6 +83,13 @@ public class ImovelServico extends Servico<Imovel> {
     			sqlQuery+=" AND ";
     		}  
     		sqlQuery+= " i.quartos = " + quartos;    		
+    	}
+    	
+    	if(metros != 0) {
+    		if(garagem || piscina || beiramar || salareuniao || quartos != 0) {
+    			sqlQuery+=" AND ";
+    		}  
+    		sqlQuery+= " i.metros = " + metros;    		
     	}
     	
     	
