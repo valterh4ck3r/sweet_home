@@ -60,6 +60,22 @@
                         <p>Filtrar Imóveis com Sala de Reunião
                             <h:selectBooleanCheckbox title="Filtrar Imóveis Sala de Reunião" value="#{cadastroImovel.filtrarSalaReuniao}" id="chexkboxSalaReuniao" /> 
                         </p>
+
+                        <br/>
+                        <br/>
+                        
+                        Selecione a Quantidade de Quartos:   
+                            <h:selectOneMenu value="#{cadastroImovel.filtrarQuantidadeQuartos}">
+                                <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                <f:selectItem itemValue="1" itemLabel="1 quarto" />
+                                <f:selectItem itemValue="2" itemLabel="2 quartos" />
+                                <f:selectItem itemValue="3" itemLabel="3 quartos" />
+                                <f:selectItem itemValue="4" itemLabel="4 quartos" />
+                                <f:selectItem itemValue="5" itemLabel="5 quartos" />
+                                <f:selectItem itemValue="6" itemLabel="6 quartos" />
+                            </h:selectOneMenu>
+                        
+
                         <br/>
                         <br/>
                         <h:commandButton value="Pesquisar" action="#{cadastroImovel.carregarImoveis}" />
