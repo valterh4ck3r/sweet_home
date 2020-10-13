@@ -6,6 +6,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import static javax.ejb.TransactionAttributeType.SUPPORTS;
+
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.NotNull;
 import javax.validation.executable.ExecutableType;
@@ -42,6 +44,45 @@ public class ImovelServico extends Servico<Imovel> {
                 = entityManager.createNamedQuery("Imovel.RecuperarImoveis", classe);
         return query.getResultList();
     }    
+    
+    public List<Imovel> recuperarImoveisComFiltro(boolean garagem, boolean piscina, boolean beiramar, boolean salareuniao) {
+    	
+    	String sqlQuery = "SELECT * FROM TB_IMOVEL i";
+    	
+    	if(garagem || piscina || beiramar || salareuniao) {
+    		sqlQuery+= " WHERE ";
+    	}
+    	
+    	if(garagem) {
+    		sqlQuery+= " i.garagem = " + garagem;
+    	}
+    	
+    	if(piscina) {    		
+    		if(garagem) {
+    			sqlQuery+=" AND ";
+    		}    		
+    		sqlQuery+= " i.piscina = " + piscina;
+    	}
+    	
+    	if(beiramar) {
+    		if(garagem || piscina) {
+    			sqlQuery+=" AND ";
+    		}  
+    		sqlQuery+= " i.beiramar = " + beiramar;
+    	}
+    	
+    	if(salareuniao) {    		
+    		if(garagem || piscina || beiramar) {
+    			sqlQuery+=" AND ";
+    		}  
+    		sqlQuery+= " i.salareuniao = " + salareuniao;
+    	}    	
+    	
+    	
+        Query query = entityManager.createNativeQuery(sqlQuery, classe);
+        List<Imovel> imoveis = query.getResultList();       
+        return imoveis;
+    }  
     
     @TransactionAttribute(SUPPORTS) 
     public List<Imovel> consultarPorQuartos(@NotNull int quartos) {

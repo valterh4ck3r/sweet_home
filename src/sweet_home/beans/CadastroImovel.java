@@ -111,78 +111,16 @@ public class CadastroImovel implements Serializable {
         return "cadastro";
     }
     
-	public List<Imovel> carregarImoveis() {	
-				
-		List<Imovel> imoveisFiltrados = new ArrayList<Imovel>();		
-		List<Imovel> imoveisFiltradosGaragem = new ArrayList<Imovel>();
-        List<Imovel> imoveisFiltradosPiscina = new ArrayList<Imovel>();
-        List<Imovel> imoveisFiltradosBeiraMar = new ArrayList<Imovel>();
-		List<Imovel> imoveisFiltradosSalaReuniao = new ArrayList<Imovel>();
-		
-		List<Imovel> imoveis = imovelServico.recuperarImoveis();
-		
-		if(filtrarGaragem) {
-			for(Imovel i : imoveis) {
-				if(i.isGaragem()) {
-					imoveisFiltradosGaragem.add(i);
-				}				
-			}
-		} else {
-			for(Imovel i : imoveis) {
-				imoveisFiltradosGaragem.add(i);			
-			}
-		}
-                
-        if(filtrarPiscina) {
-			for(Imovel i : imoveisFiltradosGaragem) {
-				if(i.isPiscina()) {
-					imoveisFiltradosPiscina.add(i);
-				}				
-			}
-		} else {
-			for(Imovel i : imoveisFiltradosGaragem) {
-				imoveisFiltradosPiscina.add(i);			
-			}
-		}
-        
-        
-		
-		if(filtrarBeiraMar) {
-			for(Imovel i : imoveisFiltradosPiscina) {
-				if(i.isBeiramar()) {
-					imoveisFiltradosBeiraMar.add(i);
-				}				
-			}
-		} else {
-			for(Imovel i : imoveisFiltradosPiscina) {
-				imoveisFiltradosBeiraMar.add(i);			
-			}
-		}
-                
-       if(filtrarSalaReuniao) {
-			for(Imovel i : imoveisFiltradosBeiraMar) {
-				if(i.isSalaReuniao()) {
-					imoveisFiltradosSalaReuniao.add(i);
-				}				
-			}
-		} else {
-			for(Imovel i : imoveisFiltradosBeiraMar) {
-				imoveisFiltradosSalaReuniao.add(i);			
-			}
-		}
-        
-        imoveisFiltrados = imoveisFiltradosSalaReuniao;
-        
-		lista = imoveisFiltradosSalaReuniao;
-		setLista(imoveisFiltradosSalaReuniao);
-
-        return imoveisFiltradosSalaReuniao;
+	public List<Imovel> carregarImoveis() {				
+		List<Imovel> imoveis = imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao);        
+		lista = imoveis;
+		setLista(imoveis);
+        return imoveis;
     
 	}
       
      
-    public void excluir(Imovel imovel) {
-               
+    public void excluir(Imovel imovel) {               
        imovelServico.remover(imovel);      
     }
 
