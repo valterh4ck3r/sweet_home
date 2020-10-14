@@ -76,7 +76,10 @@ public class CadastroImovel implements Serializable {
     private boolean filtrarBeiraMar = false;
     private boolean filtrarSalaReuniao = false;
     private String filtrarQuantidadeQuartos = "0";
-    private String filtrarMetrosQuadrados = "0";
+    private String filtrarMetrosQuadradosMinimo = "0";
+    private String filtrarMetrosQuadradosMaximo = "0";
+
+    private UIComponent metrosMessage;    
         
     private Part imageFile; 
     
@@ -113,8 +116,21 @@ public class CadastroImovel implements Serializable {
         return "cadastro";
     }
     
-	public List<Imovel> carregarImoveis() {				
-		List<Imovel> imoveis = imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadrados));        
+	public List<Imovel> carregarImoveis() {
+		
+		List<Imovel> imoveis = new ArrayList<>();
+		
+		if(Integer.parseInt(filtrarMetrosQuadradosMinimo) > Integer.parseInt(filtrarMetrosQuadradosMaximo)) {
+	        FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(metrosMessage.getClientId(context), 
+                    new FacesMessage("", "Filtro de metros quadrados estão incorretos"));	    
+    		lista = imoveis;
+    		setLista(imoveis);
+            return imoveis;  
+		}	
+		
+		
+		imoveis = imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadradosMinimo) , Integer.parseInt(filtrarMetrosQuadradosMaximo));        
 		lista = imoveis;
 		setLista(imoveis);
         return imoveis;    
@@ -327,16 +343,34 @@ public class CadastroImovel implements Serializable {
 	}
 	
 
-	public String getFiltrarMetrosQuadrados() {
-		return filtrarMetrosQuadrados;
+	public String getFiltrarMetrosQuadradosMinimo() {
+		return filtrarMetrosQuadradosMinimo;
 	}
 
-	public void setFiltrarMetrosQuadrados(String filtrarMetrosQuadrados) {
-		this.filtrarMetrosQuadrados = filtrarMetrosQuadrados;
+	public void setFiltrarMetrosQuadradosMinimo(String filtrarMetrosQuadradosMinimo) {
+		this.filtrarMetrosQuadradosMinimo = filtrarMetrosQuadradosMinimo;
+	}
+
+	public String getFiltrarMetrosQuadradosMaximo() {
+		return filtrarMetrosQuadradosMaximo;
+	}
+
+	public void setFiltrarMetrosQuadradosMaximo(String filtrarMetrosQuadradosMaximo) {
+		this.filtrarMetrosQuadradosMaximo = filtrarMetrosQuadradosMaximo;
 	}
 
 	public static void setLista(List<Imovel> lista) {
 		CadastroImovel.lista = lista;
 	}
+
+	public UIComponent getMetrosMessage() {
+		return metrosMessage;
+	}
+
+	public void setMetrosMessage(UIComponent metrosMessage) {
+		this.metrosMessage = metrosMessage;
+	}
+	
+	
     
 }

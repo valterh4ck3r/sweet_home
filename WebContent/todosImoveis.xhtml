@@ -81,18 +81,15 @@
                         <br/>
                         <br/>
 
-                        Filtrar por Metros Quadrados  (m²):   
-                        <h:selectOneMenu value="#{cadastroImovel.filtrarMetrosQuadrados}">
-                            <f:selectItem itemValue="0" itemLabel="Selecione" />
-                            <f:selectItem itemValue="15" itemLabel="15 m²" />
-                            <f:selectItem itemValue="20" itemLabel="20 m²" />
-                            <f:selectItem itemValue="25" itemLabel="25 m²" />
-                            <f:selectItem itemValue="30" itemLabel="30 m²" />
-                            <f:selectItem itemValue="35" itemLabel="35 m²" />
-                            <f:selectItem itemValue="40" itemLabel="40 m²" />
-                            <f:selectItem itemValue="45" itemLabel="45 m²" />
-                            <f:selectItem itemValue="50" itemLabel="50 m²" />
-                        </h:selectOneMenu>
+                        Filtrar por Metros Quadrados  (m²)
+                        <br/>
+                        <br/>
+                        <h:inputText value="#{cadastroImovel.filtrarMetrosQuadradosMinimo}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>&nbsp;&nbsp;&nbsp;entre&nbsp;&nbsp;&nbsp;
+                        <h:inputText value="#{cadastroImovel.filtrarMetrosQuadradosMaximo}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+
+                        <p:outputLabel binding="#{cadastroImovel.metrosMessage}" id="metrosMessage" />
+                        <a style="color:red; font-size: 20px"><h:message for="metrosMessage" /></a>
+                        
                     
 
                     <br/>
