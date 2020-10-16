@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+           
+    <f:view contentType="text/html">
+        <h:head>
+            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+            
+        </h:head>
+        
+
+        <h:body >
+            
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="0" resizable="true" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                
+                <p:layoutUnit position="west" size="210" header="Servicos" collapsible="true">
+                    <h:form>
+                    <p:menu>
+                        <p:submenu label="Opções">
+                            
+                 			<p:menuitem ajax="false" action="/admin/index.xhtml" value="Voltar"/>                            
+                            	           
+                        </p:submenu>
+
+                    </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                                         
+                    <br/>
+
+
+	                 <h:form>
+                    
+                    	<p:outputLabel style="font-size:30px; font-weight: bold" value="Filtrar imóveis" />		<br/><br/><br/>
+                    
+                        <p>Filtrar Imóveis com Garagem
+                            <h:selectBooleanCheckbox title="Filtrar Imóveis com Garagem" value="#{cadastroImovel.filtrarGaragem}" id="chexkboxGaragem" /> 
+                        </p>
+                        <br/>
+                        <p>Filtrar Imóveis com Piscina 
+                            <h:selectBooleanCheckbox title="Filtrar Imóveis com Piscina" value="#{cadastroImovel.filtrarPiscina}" id="chexkboxPiscina" /> 
+                        </p>
+                        <br/>
+                        <p>Filtrar Imóveis com Beira Mar 
+                            <h:selectBooleanCheckbox title="Filtrar Imóveis Beira Mar" value="#{cadastroImovel.filtrarBeiraMar}" id="chexkboxBeiraMar" /> 
+                        </p>
+                        <br/>
+                        <p>Filtrar Imóveis com Sala de Reunião
+                            <h:selectBooleanCheckbox title="Filtrar Imóveis Sala de Reunião" value="#{cadastroImovel.filtrarSalaReuniao}" id="chexkboxSalaReuniao" /> 
+                        </p>
+
+                        <br/>
+                        <br/>
+                        
+                        Filtrar por Quantidade de Quartos:   
+                            <h:selectOneMenu value="#{cadastroImovel.filtrarQuantidadeQuartos}">
+                                <f:selectItem itemValue="0" itemLabel="Selecione" />
+                                <f:selectItem itemValue="1" itemLabel="1 quarto" />
+                                <f:selectItem itemValue="2" itemLabel="2 quartos" />
+                                <f:selectItem itemValue="3" itemLabel="3 quartos" />
+                                <f:selectItem itemValue="4" itemLabel="4 quartos" />
+                                <f:selectItem itemValue="5" itemLabel="5 quartos" />
+                                <f:selectItem itemValue="6" itemLabel="6 quartos" />
+                            </h:selectOneMenu>
+                        
+
+                        <br/>
+                        <br/>                        
+                        <br/>
+                        <br/>
+
+                        Filtrar por Metros Quadrados  (m²)
+                        <br/>
+                        <br/>
+                        <h:inputText value="#{cadastroImovel.filtrarMetrosQuadradosMinimo}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>&nbsp;&nbsp;&nbsp;entre&nbsp;&nbsp;&nbsp;
+                        <h:inputText value="#{cadastroImovel.filtrarMetrosQuadradosMaximo}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+
+                        <p:outputLabel binding="#{cadastroImovel.metrosMessage}" id="metrosMessage" />
+                        <a style="color:red; font-size: 20px"><h:message for="metrosMessage" /></a>
+               
+
+                    <br/>                    
+                    <br/>
+                    <br/>
+
+
+                        <p:commandButton ajax="false" value="Pesquisar" actionListener="#{cadastroImovel.setFiltrar(true)}" action="/admin/todosImoveis.xhtml" />
+					    <h:messages />
+					</h:form>
+
+
+                </p:layoutUnit>
+
+            </p:layout>
+            
+        </h:body>
+
+    </f:view>
+</html>
+

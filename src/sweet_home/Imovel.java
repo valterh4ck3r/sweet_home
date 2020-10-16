@@ -50,6 +50,10 @@ import org.primefaces.model.DefaultStreamedContent;
                     name = "Imovel.RecuperarPorSalaReuniao",
                     query = "SELECT r FROM Imovel r WHERE r.salareuniao = ?1"
             ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorUsuario",
+                    query = "SELECT i FROM Imovel i WHERE i.usuario = ?1"
+            )
           
         }
 )

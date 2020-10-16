@@ -15,6 +15,7 @@ import javax.validation.executable.ValidateOnExecution;
 import org.hibernate.validator.constraints.NotBlank;
 
 import sweet_home.Imovel;
+import sweet_home.Usuario;
 
 @Stateless(name = "ejb/ImovelServico")
 @LocalBean
@@ -97,6 +98,12 @@ public class ImovelServico extends Servico<Imovel> {
         List<Imovel> imoveis = query.getResultList();       
         return imoveis;
     }  
+        
+    
+    @TransactionAttribute(SUPPORTS) 
+    public List<Imovel> recuperarPorUsuario(@NotNull Usuario u) {
+        return super.consultarEntidades(new Object[] {u}, "Imovel.RecuperarPorUsuario");         
+    }
     
     @TransactionAttribute(SUPPORTS) 
     public List<Imovel> consultarPorQuartos(@NotNull int quartos) {

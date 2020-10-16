@@ -42,7 +42,7 @@ import org.apache.commons.io.IOUtils;
 
 
 @ManagedBean
-@RequestScoped
+@javax.faces.bean.SessionScoped
 public class CadastroImovel implements Serializable {
       
 	private static final long serialVersionUID = 1L;
@@ -51,7 +51,8 @@ public class CadastroImovel implements Serializable {
     private ImovelServico imovelServico; 
 	@EJB
     private UsuarioServico usuarioServico; 
-	
+		
+	private boolean filtrar;
     private int banheiros = 0;    
     private int quartos = 0;
     private int salas = 0;
@@ -128,12 +129,20 @@ public class CadastroImovel implements Serializable {
     		setLista(imoveis);
             return imoveis;  
 		}	
+				
+		if(!filtrar) return imovelServico.recuperarImoveis();
+	
 		
+		else {
+			filtrar = false;
+			return imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadradosMinimo) , Integer.parseInt(filtrarMetrosQuadradosMaximo));        
+		}
 		
-		imoveis = imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadradosMinimo) , Integer.parseInt(filtrarMetrosQuadradosMaximo));        
-		lista = imoveis;
-		setLista(imoveis);
-        return imoveis;    
+			
+//		lista = imoveis;		
+//		setLista(imoveis);
+//				
+//        return imoveis;    
 	}
       
      
@@ -163,6 +172,23 @@ public class CadastroImovel implements Serializable {
     	this.imageFile = imageFile;
     }
        
+    
+    
+    public List<Imovel> meusImoveis() {
+    	
+    	HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+        Usuario usuarioLogado = (Usuario) sessao.getAttribute("logado");
+    	return imovelServico.recuperarPorUsuario(usuarioLogado);
+    }
+      
+    public boolean getFiltrar() {
+    	return filtrar;
+    }
+    
+    public void setFiltrar(boolean filtrar) {
+    	this.filtrar = filtrar;
+    }
+    
     public Endereco getSelected(){
         return selected;
     }
