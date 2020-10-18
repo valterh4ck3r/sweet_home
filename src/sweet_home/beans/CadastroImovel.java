@@ -80,7 +80,8 @@ public class CadastroImovel implements Serializable {
     private String filtrarMetrosQuadradosMinimo = "0";
     private String filtrarMetrosQuadradosMaximo = "0";
 
-    private UIComponent metrosMessage;    
+    private UIComponent metrosMessage;   
+    private String metrosMessageError = ""; 
         
     private Part imageFile; 
     
@@ -121,14 +122,24 @@ public class CadastroImovel implements Serializable {
 		
 		List<Imovel> imoveis = new ArrayList<>();
 		
-		if(Integer.parseInt(filtrarMetrosQuadradosMinimo) > Integer.parseInt(filtrarMetrosQuadradosMaximo)) {
-	        FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(metrosMessage.getClientId(context), 
-                    new FacesMessage("", "Filtro de metros quadrados estão incorretos"));	    
-    		lista = imoveis;
-    		setLista(imoveis);
-            return imoveis;  
-		}	
+		if(filtrarQuantidadeQuartos == "") {
+			filtrarQuantidadeQuartos = "0";
+		}
+		
+		if(filtrarMetrosQuadradosMinimo == "") {
+			filtrarMetrosQuadradosMinimo = "0";
+		}
+		
+		if(filtrarMetrosQuadradosMaximo == "") {
+			filtrarMetrosQuadradosMaximo = "0";
+		}
+		
+		if((Integer.parseInt(filtrarMetrosQuadradosMinimo) > Integer.parseInt(filtrarMetrosQuadradosMaximo))) {	 
+            metrosMessageError = "Filtro de metros quadrados estão incorretos";
+            return imoveis;
+		} else {
+			metrosMessageError = "";
+		}
 				
 		if(!filtrar) return imovelServico.recuperarImoveis();
 	
@@ -187,6 +198,27 @@ public class CadastroImovel implements Serializable {
     
     public void setFiltrar(boolean filtrar) {
     	this.filtrar = filtrar;
+    			
+		if(filtrarQuantidadeQuartos == "") {
+			filtrarQuantidadeQuartos = "0";
+		}
+		
+		if(filtrarMetrosQuadradosMinimo == "") {
+			filtrarMetrosQuadradosMinimo = "0";
+		}
+		
+		if(filtrarMetrosQuadradosMaximo == "") {
+			filtrarMetrosQuadradosMaximo = "0";
+		}
+		
+		if((Integer.parseInt(filtrarMetrosQuadradosMinimo) > Integer.parseInt(filtrarMetrosQuadradosMaximo))) {
+	        FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(metrosMessage.getClientId(context), 
+                    new FacesMessage("", "Filtro de metros quadrados estão incorretos"));	    
+            metrosMessageError = "Filtro de metros quadrados estão incorretos";
+		} else {
+            metrosMessageError = "";
+		}
     }
     
     public Endereco getSelected(){
@@ -396,7 +428,14 @@ public class CadastroImovel implements Serializable {
 	public void setMetrosMessage(UIComponent metrosMessage) {
 		this.metrosMessage = metrosMessage;
 	}
-	
-	
+
+	public String getMetrosMessageError() {
+		return metrosMessageError;
+	}
+
+	public void setMetrosMessageError(String metrosMessageError) {
+		this.metrosMessageError = metrosMessageError;
+	}
+
     
 }

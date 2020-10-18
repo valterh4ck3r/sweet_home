@@ -99,7 +99,11 @@
 
 
                         <h:commandButton value="Pesquisar" action="#{cadastroImovel.carregarImoveis}" />
-					    <h:messages />
+                        <h:messages />
+                        
+                        <p:outputLabel binding="#{cadastroImovel.metrosMessage}" id="metrosMessage" />
+                        <a style="color:red; font-size: 20px"><h:message for="metrosMessage" /></a>
+                        
 					</h:form>
 
                     <br/>
