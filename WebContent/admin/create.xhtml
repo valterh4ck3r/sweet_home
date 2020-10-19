@@ -61,17 +61,17 @@
             <div class="form-group">
                 <h:outputLabel for="quartos" class="control-label col-sm-4">Quantidade de quartos</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:selectOneMenu type="number" id="quartos-id" value="#{cadastroImovel.quartos}" class="form-control" validatorMessage="Quantidade de quartos é obrigatório">
+                    <h:selectOneMenu type="text" id="quartos-id" value="#{cadastroImovel.quartos}" class="form-control" validatorMessage="Quantidade de quartos é obrigatório">
 	                    <f:selectItem itemLabel="1" itemValue="1" />
 	            		<f:selectItem itemLabel="2" itemValue="2" />
 	            		<f:selectItem itemLabel="3" itemValue="3" />
 	            		<f:selectItem itemLabel="4" itemValue="4" />
 	            		<f:selectItem itemLabel="5" itemValue="5" />
 	            		<f:selectItem itemLabel="6" itemValue="6" />
-	            		<f:selectItem itemLabel="3" itemValue="7" />
-	            		<f:selectItem itemLabel="4" itemValue="8" />
-	            		<f:selectItem itemLabel="5" itemValue="9" />
-	            		<f:selectItem itemLabel="6" itemValue="10" />
+	            		<f:selectItem itemLabel="7" itemValue="7" />
+	            		<f:selectItem itemLabel="8" itemValue="8" />
+	            		<f:selectItem itemLabel="9" itemValue="9" />
+	            		<f:selectItem itemLabel="10" itemValue="10" />
                         <f:validateRequired/>
                     </h:selectOneMenu>
                 </div>
@@ -81,17 +81,17 @@
             <div class="form-group">
                 <h:outputLabel for="banheiros" class="control-label col-sm-4">Quantidade de banheiros</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:selectOneMenu type="number" id="banheiros-id" value="#{cadastroImovel.banheiros}" class="form-control" validatorMessage="Quantidade de banheiros é obrigatório">
+                    <h:selectOneMenu type="text" id="banheiros-id" value="#{cadastroImovel.banheiros}" class="form-control" validatorMessage="Quantidade de banheiros é obrigatório">
                     	<f:selectItem itemLabel="1" itemValue="1" />
 	            		<f:selectItem itemLabel="2" itemValue="2" />
 	            		<f:selectItem itemLabel="3" itemValue="3" />
 	            		<f:selectItem itemLabel="4" itemValue="4" />
 	            		<f:selectItem itemLabel="5" itemValue="5" />
 	            		<f:selectItem itemLabel="6" itemValue="6" />
-	            		<f:selectItem itemLabel="3" itemValue="7" />
-	            		<f:selectItem itemLabel="4" itemValue="8" />
-	            		<f:selectItem itemLabel="5" itemValue="9" />
-	            		<f:selectItem itemLabel="6" itemValue="10" />
+	            		<f:selectItem itemLabel="7" itemValue="7" />
+	            		<f:selectItem itemLabel="8" itemValue="8" />
+	            		<f:selectItem itemLabel="9" itemValue="9" />
+	            		<f:selectItem itemLabel="10" itemValue="10" />
                         <f:validateRequired/>
                     </h:selectOneMenu>
                 </div>
@@ -101,17 +101,17 @@
             <div class="form-group">
                 <h:outputLabel for="salas" class="control-label col-sm-4">Quantidade de salas:</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:selectOneMenu type="number" id="salas-id" value="#{cadastroImovel.salas}" class="form-control" validatorMessage="Quantidade de salas é obrigatório">
+                    <h:selectOneMenu type="text" id="salas-id" value="#{cadastroImovel.salas}" class="form-control" validatorMessage="Quantidade de salas é obrigatório">
 	                    <f:selectItem itemLabel="1" itemValue="1" />
 	            		<f:selectItem itemLabel="2" itemValue="2" />
 	            		<f:selectItem itemLabel="3" itemValue="3" />
 	            		<f:selectItem itemLabel="4" itemValue="4" />
 	            		<f:selectItem itemLabel="5" itemValue="5" />
 	            		<f:selectItem itemLabel="6" itemValue="6" />
-	            		<f:selectItem itemLabel="3" itemValue="7" />
-	            		<f:selectItem itemLabel="4" itemValue="8" />
-	            		<f:selectItem itemLabel="5" itemValue="9" />
-	            		<f:selectItem itemLabel="6" itemValue="10" />
+	            		<f:selectItem itemLabel="7" itemValue="7" />
+	            		<f:selectItem itemLabel="8" itemValue="8" />
+	            		<f:selectItem itemLabel="9" itemValue="9" />
+	            		<f:selectItem itemLabel="10" itemValue="10" />
                         <f:validateRequired/>
                     </h:selectOneMenu>
                 </div>
@@ -121,7 +121,7 @@
             <div class="form-group">
                 <h:outputLabel for="tipo" class="control-label col-sm-4">Tipo do imovél (Casa ou apartamento):</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:selectOneRadio type="number" id="tipo-id" value="#{cadastroImovel.tipo}" class="form-control" validatorMessage="Tipo do imovél é obrigatório">
+                    <h:selectOneRadio type="text" id="tipo-id" value="#{cadastroImovel.tipo}" class="form-control" validatorMessage="Tipo do imovél é obrigatório">
                     <f:selectItem itemLabel="Casa" itemValue="0" />
             		<f:selectItem itemLabel="Apartamento" itemValue="1" />
             		<f:validateRequired/>
@@ -165,7 +165,7 @@
             <div class="form-group">
                 <h:outputLabel for="metros" class="control-label col-sm-4">Qual o tamanho do terrono?</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputText type="number" id="metros-id" value="#{cadastroImovel.metros}" class="form-control" validatorMessage="O tamanho aproximado é obrigatorio">
+                    <h:inputText type="text" id="metros-id" value="#{cadastroImovel.metros}" class="form-control" validatorMessage="O tamanho aproximado é obrigatorio">
             		<f:validateRequired/>
                     </h:inputText>
                 </div>
@@ -175,7 +175,7 @@
             <div class="form-group">
                 <h:outputLabel for="valor" class="control-label col-sm-4">Valor do aluguel:</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputText type="number" mask="00,00" id="valor-id" value="#{cadastroImovel.valor}" class="form-control" validatorMessage="Valor do aluguel é obrigatorio">
+                    <h:inputText type="text" mask="00,00" id="valor-id" value="#{cadastroImovel.valor}" class="form-control" validatorMessage="Valor do aluguel é obrigatorio">
             		<f:validateRequired/>
                     </h:inputText>
                 </div>
@@ -196,7 +196,7 @@
              <div class="form-group">
                 <h:outputLabel for="numero" class="control-label col-sm-4">Numero:</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputText type="number" id="numero-id" value="#{cadastroImovel.numero}" class="form-control" validatorMessage="Obrigatorio" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;">
+                    <h:inputText type="text" id="numero-id" value="#{cadastroImovel.numero}" class="form-control" validatorMessage="Obrigatorio" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;">
             		<f:validateRequired/>
                     </h:inputText>
                 </div>
@@ -262,7 +262,7 @@
             <div class="form-group">
                 <h:outputLabel for="cep" class="control-label col-sm-4">CEP:</h:outputLabel>
                 <div class="col-sm-4">
-                    <h:inputText type="text" mask="00000-000" id="cep-id" value="#{cadastroImovel.CEP}" class="form-control" validatorMessage="Obrigatorio">
+                    <h:inputText type="text" id="cep-id" value="#{cadastroImovel.CEP}" class="form-control" validatorMessage="Obrigatorio">
             		<f:validateRequired/>
                     </h:inputText>
                 </div>

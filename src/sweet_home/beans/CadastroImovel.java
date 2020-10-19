@@ -56,7 +56,7 @@ public class CadastroImovel implements Serializable {
     private int banheiros = 0;    
     private int quartos = 0;
     private int salas = 0;
-    private static Usuario usuario = null;
+    private Usuario usuario = null;
     private int tipo;
     private String descricao = null;
     private double valor = 0.0;
@@ -98,6 +98,16 @@ public class CadastroImovel implements Serializable {
         Imovel imovel = new Imovel();
         
         Endereco endereco = new Endereco();
+        
+        //sys.out
+        
+        System.out.println("int banheiros= "+banheiros);
+        System.out.println("int quartos= "+quartos);
+        System.out.println("int salas= "+salas);
+        System.out.println("int tipo= "+tipo);
+        System.out.println("int valor= "+valor);
+        System.out.println("int metros= "+metros);
+        
         endereco.setNumero(numero);        
         endereco.setRua(rua);
         endereco.setBairro(bairro);
