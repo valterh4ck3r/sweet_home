@@ -47,6 +47,10 @@
 	                 <h:form>
                     
                     	<p:outputLabel style="font-size:30px; font-weight: bold" value="Filtrar imóveis" />		<br/><br/><br/>
+                    	
+                    	<p>Filtrar Imóveis por avaliação
+                            <h:selectBooleanCheckbox title="Filtrar Imóveis por avaliação" value="#{cadastroImovel.filtrarNotaMaior}" id="chexkboxNotaMaior" /> 
+                        </p>
                     
                         <p>Filtrar Imóveis com Garagem
                             <h:selectBooleanCheckbox title="Filtrar Imóveis com Garagem" value="#{cadastroImovel.filtrarGaragem}" id="chexkboxGaragem" /> 

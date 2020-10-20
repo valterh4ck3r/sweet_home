@@ -46,7 +46,7 @@ public class ImovelServico extends Servico<Imovel> {
         return query.getResultList();
     }    
     
-    public List<Imovel> recuperarImoveisComFiltro(boolean garagem, boolean piscina, boolean beiramar, boolean salareuniao , int quartos , int metrosMinimo , int metrosMaximo) {
+    public List<Imovel> recuperarImoveisComFiltro(boolean garagem, boolean piscina, boolean beiramar, boolean salareuniao , int quartos , int metrosMinimo , int metrosMaximo ,boolean notaMaior) {
     	
     	String sqlQuery = "SELECT * FROM TB_IMOVEL i";
     	
@@ -91,6 +91,10 @@ public class ImovelServico extends Servico<Imovel> {
     			sqlQuery+=" AND ";
     		}  
     		sqlQuery+= " i.metros >= " + metrosMinimo +" AND i.metros <= " + metrosMaximo;    		
+    	}
+    	
+    	if(notaMaior) { 
+    		sqlQuery+= " ORDER BY NOTA DESC" ;    		
     	}
     	
         Query query = entityManager.createNativeQuery(sqlQuery, classe);

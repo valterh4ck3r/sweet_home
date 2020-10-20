@@ -137,11 +137,17 @@ public class Imovel extends Entidade {
     @Column(name = "METROS")
     private int metros;
     
+    @Column(name="NOTA")
+    private Long nota;
+    
+    @Column(name= "QUANTIDADENOTA")
+    private Long quantidadeNota;
+    
     public Imovel() {
     	
     }
     
-    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean garagem, boolean piscina , boolean beiramar, boolean salareuniao , int metros) {
+    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean garagem, boolean piscina , boolean beiramar, boolean salareuniao , int metros, long nota, long quantidadeNota) {
     	
     	this.id = id;
     	this.quartos= quartos;
@@ -158,6 +164,8 @@ public class Imovel extends Entidade {
     	this.beiramar = beiramar;
     	this.salareuniao = salareuniao;
     	this.metros = metros;
+    	this.nota = nota;
+    	this.quantidadeNota = quantidadeNota;
     }
     
     public Long getId() {
@@ -332,6 +340,22 @@ public class Imovel extends Entidade {
 	public void setMetros(int metros) {
 		this.metros = metros;
 	}
+	
+	public long getNota(){
+    	return nota;
+    }
+    
+    public void setNota(Long nota) {
+    	this.nota = nota;
+    }
+    
+    public long getQuantidadeNota(){
+    	return quantidadeNota;
+    }
+    
+    public void setQuantidadeNota(Long quantidadeNota) {
+    	this.quantidadeNota = quantidadeNota;
+    }
     
     
     

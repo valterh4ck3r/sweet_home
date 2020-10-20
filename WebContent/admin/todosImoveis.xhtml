@@ -87,6 +87,10 @@
                                 <p:column style="text-align: center; width: 12%" headerText="Valor">
                                     <h:outputText value="R$ #{listaImovel.valor}" />
                                 </p:column> 
+                                
+                                <p:column style="text-align: center; width: 12%" headerText="Nota">
+                                    <h:outputText value="#{listaImovel.nota}" />
+                                </p:column>
                            
                                 <p:column style="text-align: center; width: 220px" headerText="Responsável">                                	
                                 	<p:carousel value="#{utils.telefones(listaImovel.usuario.email)}" headerText="#{listaImovel.usuario.primeiroNome}" 
