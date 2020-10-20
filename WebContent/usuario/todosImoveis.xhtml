@@ -57,7 +57,10 @@
                             <p:dataTable id="imoveis" var="listaImovel" value="#{cadastroImovel.carregarImoveis()}" rowKey="#{listaImovel.id}" >
                                 <f:facet name="header">
                                     Imóveis 
-                                </f:facet>  
+                                </f:facet>
+                                <p:column style="text-align: center; width: 11%" headerText="Nota">
+                                    <h:outputText value="#{listaImovel.nota}" />
+                                </p:column>  
                                 <p:column style="text-align: center; width: 11%" headerText="Salas">
                                     <h:outputText value="#{listaImovel.salas}" />
                                 </p:column>   
@@ -88,6 +91,10 @@
                                 <p:column style="text-align: center; width: 12%" headerText="Valor">
                                     <h:outputText value="R$ #{listaImovel.valor}" />
                                 </p:column> 
+                                
+                                <p:column style="text-align: center; width: 12%" headerText="Nota">
+                                    <h:outputText value="#{listaImovel.nota}" />
+                                </p:column>
                            
                                 <p:column style="text-align: center; width: 220px" headerText="Responsável">                                	
                                 	<p:carousel value="#{utils.telefones(listaImovel.usuario.email)}" headerText="#{listaImovel.usuario.primeiroNome}" 

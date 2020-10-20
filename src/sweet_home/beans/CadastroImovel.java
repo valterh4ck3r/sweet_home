@@ -60,6 +60,8 @@ public class CadastroImovel implements Serializable {
     private String tipo;
     private String descricao = "";
     private String valor = "0.0";
+    private String nota = "0";
+    private String quantidadeNota = "0";
     private boolean garagem;
     private boolean piscina;
     private boolean beiramar;
@@ -77,6 +79,7 @@ public class CadastroImovel implements Serializable {
     private static List<Imovel> lista = new ArrayList<Imovel>();
     private static Endereco selected = null; 
     
+    private boolean filtrarNotaMaior = false;
     private boolean filtrarGaragem = false;
     private boolean filtrarPiscina = false;
     private boolean filtrarBeiraMar = false;
@@ -106,13 +109,14 @@ public class CadastroImovel implements Serializable {
         Endereco endereco = new Endereco();
         
         //sys.out
-        
+        /**
         System.out.println("int banheiros= "+banheiros);
         System.out.println("int quartos= "+quartos);
         System.out.println("int salas= "+salas);
         System.out.println("int tipo= "+tipo);
         System.out.println("int valor= "+valor);
         System.out.println("int metros= "+metros);
+        **/
         
         endereco.setNumero(numero);        
         endereco.setRua(rua);
@@ -130,12 +134,15 @@ public class CadastroImovel implements Serializable {
         imovel.setSalas(Integer.parseInt(salas));
         imovel.setTipo(Integer.parseInt(tipo));
         imovel.setDescricao(descricao);
-        imovel.setValor(Double.parseDouble(quartos));
+        imovel.setValor(Double.parseDouble(valor));
         imovel.setGaragem(garagem);
         imovel.setPiscina(piscina);
         imovel.setBeiramar(beiramar);
         imovel.setSalaReuniao(salareuniao);
         imovel.setMetros(Integer.parseInt(quartos));
+        imovel.setNota(Long.parseLong(nota));
+        imovel.setQuantidadeNota(Long.parseLong(quantidadeNota));
+        
         imovel.setEndereco(endereco);
         imovel.setUsuario(usuarioLogado);
         
@@ -162,7 +169,7 @@ public class CadastroImovel implements Serializable {
 		}
 		
 		if((Integer.parseInt(filtrarMetrosQuadradosMinimo) > Integer.parseInt(filtrarMetrosQuadradosMaximo))) {	 
-            metrosMessageError = "Filtro de metros quadrados estão incorretos";
+            metrosMessageError = "Filtro de metros quadrados estï¿½o incorretos";
             return imoveis;
 		} else {
 			metrosMessageError = "";
@@ -171,8 +178,8 @@ public class CadastroImovel implements Serializable {
 		if((Integer.parseInt(filtrarValorMinimo) > Integer.parseInt(filtrarValorMaximo))) {
 	        FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(metrosMessage.getClientId(context), 
-                    new FacesMessage("", "Filtro de valores estão incorretos"));	    
-            valorMessageError = "Filtro de valores estão incorretos";
+                    new FacesMessage("", "Filtro de valores estï¿½o incorretos"));	    
+            valorMessageError = "Filtro de valores estï¿½o incorretos";
 		} else {
 			valorMessageError = "";
 		}
@@ -182,7 +189,7 @@ public class CadastroImovel implements Serializable {
 		
 		else {
 			filtrar = false;
-			return imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadradosMinimo) , Integer.parseInt(filtrarMetrosQuadradosMaximo), Integer.parseInt(filtrarValorMinimo), Integer.parseInt(filtrarValorMaximo));        
+			return imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadradosMinimo) , Integer.parseInt(filtrarMetrosQuadradosMaximo), Integer.parseInt(filtrarValorMinimo), Integer.parseInt(filtrarValorMaximo) , filtrarNotaMaior);        
 		}
 		
 			
@@ -250,8 +257,8 @@ public class CadastroImovel implements Serializable {
 		if((Integer.parseInt(filtrarMetrosQuadradosMinimo) > Integer.parseInt(filtrarMetrosQuadradosMaximo))) {
 	        FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(metrosMessage.getClientId(context), 
-                    new FacesMessage("", "Filtro de metros quadrados estão incorretos"));	    
-            metrosMessageError = "Filtro de metros quadrados estão incorretos";
+                    new FacesMessage("", "Filtro de metros quadrados estï¿½o incorretos"));	    
+            metrosMessageError = "Filtro de metros quadrados estï¿½o incorretos";
 		} else {
             metrosMessageError = "";
 		}
@@ -259,8 +266,8 @@ public class CadastroImovel implements Serializable {
 		if((Integer.parseInt(filtrarValorMinimo) > Integer.parseInt(filtrarValorMaximo))) {
 	        FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(metrosMessage.getClientId(context), 
-                    new FacesMessage("", "Filtro de valores estão incorretos"));	    
-            valorMessageError = "Filtro de valores estão incorretos";
+                    new FacesMessage("", "Filtro de valores estï¿½o incorretos"));	    
+            valorMessageError = "Filtro de valores estï¿½o incorretos";
 		} else {
 			valorMessageError = "";
 		}
@@ -398,6 +405,14 @@ public class CadastroImovel implements Serializable {
     public void setResp(String resp) {
         this.resp = resp;
     }
+    
+    public boolean isFiltrarNotaMaior() {
+		return filtrarNotaMaior;
+	}
+
+	public void setFiltrarNotaMaior(boolean filtrarNotaMaior) {
+		this.filtrarNotaMaior = filtrarNotaMaior;
+	}
 
 	public boolean isFiltrarGaragem() {
 		return filtrarGaragem;
@@ -574,5 +589,21 @@ public class CadastroImovel implements Serializable {
 	}
 	
 	
+	
+	public String getNota() {
+		return metros;
+	}
+
+	public void setNota(String nota) {
+		this.nota = nota;
+	}
+	
+	public String getQuantidadeNota() {
+		return metros;
+	}
+
+	public void setQuantidadeNota(String quantidadeNota) {
+		this.quantidadeNota = quantidadeNota;
+	}
 	
 }

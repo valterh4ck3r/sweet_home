@@ -115,7 +115,10 @@
                             <p:dataTable id="imoveis" var="listaImovel" value="#{cadastroImovel.carregarImoveis()}" rowKey="#{listaImovel.id}" >
                                 <f:facet name="header">
                                     Imóveis 
-                                </f:facet>  
+                                </f:facet>
+                                <p:column style="text-align: center; width: 11%" headerText="Nota">
+                                    <h:outputText value="#{listaImovel.nota}" />
+                                </p:column>   
                                 <p:column style="text-align: center; width: 11%" headerText="Salas">
                                     <h:outputText value="#{listaImovel.salas}" />
                                 </p:column>   

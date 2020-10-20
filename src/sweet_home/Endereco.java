@@ -181,8 +181,7 @@ public class Endereco extends Entidade {
     public void setImovel(Imovel imovel) {
         this.imovel = imovel;
         //this.imovel.setEndereco(this);
-    }
-    
+    }    
     
     @Override
     public int hashCode() {
