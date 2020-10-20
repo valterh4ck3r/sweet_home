@@ -53,28 +53,28 @@ public class CadastroImovel implements Serializable {
     private UsuarioServico usuarioServico; 
 		
 	private boolean filtrar;
-    private int banheiros = 0;    
-    private int quartos = 0;
-    private int salas = 0;
+    private String banheiros = "0";    
+    private String quartos = "0";
+    private String salas = "0";
     private Usuario usuario = null;
-    private int tipo;
-    private String descricao = null;
-    private double valor = 0.0;
+    private String tipo;
+    private String descricao = "";
+    private String valor = "0.0";
     private boolean garagem;
     private boolean piscina;
     private boolean beiramar;
     private boolean salareuniao;
-    private int metros;
+    private String metros = "0";
     private UIComponent mybutton;
     protected static String resp = "";
         
-    private String cidade = null;
-    private String bairro = null;
-    private String rua = null;
-    private String numero = null;    
-    private String CEP = null;
-    private String estado = null;
-    private static List<Imovel> lista = null;
+    private String cidade = "";
+    private String bairro = "";
+    private String rua = "";
+    private String numero = "";    
+    private String CEP = "";
+    private String estado = "";
+    private static List<Imovel> lista = new ArrayList<Imovel>();
     private static Endereco selected = null; 
     
     private boolean filtrarGaragem = false;
@@ -119,17 +119,17 @@ public class CadastroImovel implements Serializable {
         Usuario usuarioLogado = (Usuario) sessao.getAttribute("logado");
         usuarioLogado = usuarioServico.consultarPorEmail(usuarioLogado.getEmail());
                 
-        imovel.setQuartos(quartos);
-        imovel.setBanheiros(banheiros);
-        imovel.setSalas(salas);
-        imovel.setTipo(tipo);
+        imovel.setQuartos(Integer.parseInt(quartos));
+        imovel.setBanheiros(Integer.parseInt(banheiros));
+        imovel.setSalas(Integer.parseInt(salas));
+        imovel.setTipo(Integer.parseInt(tipo));
         imovel.setDescricao(descricao);
-        imovel.setValor(valor);
+        imovel.setValor(Double.parseDouble(quartos));
         imovel.setGaragem(garagem);
         imovel.setPiscina(piscina);
         imovel.setBeiramar(beiramar);
         imovel.setSalaReuniao(salareuniao);
-        imovel.setMetros(metros);
+        imovel.setMetros(Integer.parseInt(quartos));
         imovel.setEndereco(endereco);
         imovel.setUsuario(usuarioLogado);
         
@@ -250,29 +250,7 @@ public class CadastroImovel implements Serializable {
         this.selected = selected;
     }
     
-    public int getBanheiros(){
-        return banheiros;
-    }
-    
-    public void setBanheiros(int banheiros) {
-        this.banheiros = banheiros;
-    }
-    
-    public int getQuartos(){
-        return quartos;
-    }
-    
-    public void setQuartos(int quartos) {
-        this.quartos = quartos;
-    }
 
-    public int getSalas(){
-        return salas;
-    }
-    
-    public void setSalas(int salas) {
-        this.salas = salas;
-    }
     
     public boolean getGaragem(){
         return garagem;
@@ -304,14 +282,6 @@ public class CadastroImovel implements Serializable {
     
     public void setPiscina(boolean piscina) {
         this.piscina = piscina;
-    }
-    
-    public int getMetros(){
-        return metros;
-    }
-    
-    public void setMetros(int metros) {
-        this.metros = metros;
     }
     
     public String getCidade() {
@@ -379,14 +349,7 @@ public class CadastroImovel implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-          
-    public int getTipo() {        
-        return tipo;
-    }
-        
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
+ 
     
     public String getDescricao() {
         return descricao;
@@ -395,14 +358,6 @@ public class CadastroImovel implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    public double getValor() {
-        return valor;
-    }
-    
-    public void setValor(double valor) {
-        this.valor = valor;
-    }    
     
     public UIComponent getMybutton() {
         return mybutton;
@@ -498,5 +453,68 @@ public class CadastroImovel implements Serializable {
 		this.metrosMessageError = metrosMessageError;
 	}
 
-    
+	public String getBanheiros() {
+		return banheiros;
+	}
+
+	public void setBanheiros(String banheiros) {
+		this.banheiros = banheiros;
+	}
+
+	public String getQuartos() {
+		return quartos;
+	}
+
+	public void setQuartos(String quartos) {
+		this.quartos = quartos;
+	}
+
+	public String getSalas() {
+		return salas;
+	}
+
+	public void setSalas(String salas) {
+		this.salas = salas;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getValor() {
+		return valor;
+	}
+
+	public void setValor(String valor) {
+		this.valor = valor;
+	}
+
+	public boolean isBeiramar() {
+		return beiramar;
+	}
+
+	public void setBeiramar(boolean beiramar) {
+		this.beiramar = beiramar;
+	}
+
+	public boolean isSalareuniao() {
+		return salareuniao;
+	}
+
+	public void setSalareuniao(boolean salareuniao) {
+		this.salareuniao = salareuniao;
+	}
+
+	public String getMetros() {
+		return metros;
+	}
+
+	public void setMetros(String metros) {
+		this.metros = metros;
+	}
+	
 }
