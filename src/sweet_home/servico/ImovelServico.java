@@ -46,11 +46,11 @@ public class ImovelServico extends Servico<Imovel> {
         return query.getResultList();
     }    
     
-    public List<Imovel> recuperarImoveisComFiltro(boolean garagem, boolean piscina, boolean beiramar, boolean salareuniao , int quartos , int metrosMinimo , int metrosMaximo) {
+    public List<Imovel> recuperarImoveisComFiltro(boolean garagem, boolean piscina, boolean beiramar, boolean salareuniao , int quartos , int metrosMinimo , int metrosMaximo, int valorMinimo , int valorMaximo) {
     	
     	String sqlQuery = "SELECT * FROM TB_IMOVEL i";
     	
-    	if(garagem || piscina || beiramar || salareuniao || quartos > 0 || metrosMinimo > 0 || metrosMaximo > 0) {
+    	if(garagem || piscina || beiramar || salareuniao || quartos > 0 || metrosMinimo > 0 || metrosMaximo > 0 || valorMinimo > 0 || valorMaximo > 0) {
     		sqlQuery+= " WHERE ";
     	}
     	
@@ -92,6 +92,14 @@ public class ImovelServico extends Servico<Imovel> {
     		}  
     		sqlQuery+= " i.metros >= " + metrosMinimo +" AND i.metros <= " + metrosMaximo;    		
     	}
+    	
+    	if(valorMinimo != 0) {
+    		if(garagem || piscina || beiramar || salareuniao || quartos != 0 || metrosMinimo != 0) {
+    			sqlQuery+=" AND ";
+    		}  
+    		sqlQuery+= " i.valor >= " + valorMinimo +" AND i.valor <= " + valorMaximo;    		
+    	}
+    	
     	
         Query query = entityManager.createNativeQuery(sqlQuery, classe);
 
