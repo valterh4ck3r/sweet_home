@@ -1,3 +1,10 @@
-body {
-    padding: 5%
+
+@font-face {
+    font-family: 'times';
+        src: url('fonts/times.ttf') format('truetype');    
+}
+
+
+.font {
+	font-family: 'times';
 }

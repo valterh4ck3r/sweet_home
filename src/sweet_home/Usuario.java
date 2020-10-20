@@ -60,9 +60,8 @@ import javax.validation.constraints.NotNull;
             @NamedQuery(
                     name = "Usuario.RecuperarPorId",
                     query = "SELECT u FROM Usuario u WHERE u.id = ?1"
-            ),
-                   
-                 
+            )
+            
         }
 )
 @NamedNativeQueries(
@@ -72,8 +71,12 @@ import javax.validation.constraints.NotNull;
                     name = "Usuario.RecuperarUsuarios",
                     query = "SELECT * FROM TB_USUARIO",
                     resultClass = Usuario.class
-            )
-        
+            ),
+            @NamedNativeQuery(
+                    name = "Usuario.OrdenadosPorEmail",
+                    query = "SELECT * FROM TB_USUARIO ORDER BY EMAIL ASC",
+                    resultClass = Usuario.class
+            )        
         }
 )
 @Access(AccessType.FIELD)

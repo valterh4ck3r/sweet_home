@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+           
+    <f:view contentType="text/html">
+        <h:head>
+            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+            <h:outputStylesheet library="css" name="main.css" />                      
+            <h:outputScript library="js" name="index.js" />
+     		     		   		
+        </h:head>
+        
+
+        <h:body style="background-color: #A0AEC0" >
+            
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="0" resizable="true" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                
+                <p:layoutUnit position="west" size="210" header="Servicos" collapsible="true">
+                
+                    <h:form>
+	                    <p:menu>
+	                        <p:submenu label="Opções">
+	                                                 
+	                            <p:menuitem ajax="false" action="/admin/meusImoveis.xhtml" value="Seus imóveis"/>	                 			
+	                 			<p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/admin/todosImoveis.xhtml" value="Todos os imóveis"/>	                                             
+	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(1)}" action="/admin/todosImoveis.xhtml" value="Filtrar imóvel"/>                              
+	                            <p:menuitem ajax="false" actionListener="#{cadastroImovel.cadastro()}" action="/admin/editarImovel" value="Cadastrar imóvel"/>	
+	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/admin/index.xhtml" value="Tela inicial"/>                    	           
+	                            	           
+	                        </p:submenu>
+	
+	                    </p:menu>
+                    </h:form>
+                    
+                </p:layoutUnit>
+                
+
+                <p:layoutUnit position="center">
+                                                                  
+                                      
+		                    <h:form styleClass="font" >
+		                       
+		                            <p:dataTable var="usuario" value="#{cadastroUsuario.usuarios()}" >
+		                                <f:facet name="header">
+		                                    Usuários 
+		                                </f:facet>  
+		                                
+		                                <p:column style="text-align: center; min-width: 50px; overflow: hidden;" headerText="Email">
+		                                    <h:outputText value="#{usuario.email}" />
+		                                </p:column>   
+		                                <p:column style="text-align: center; min-width: 70px; overflow: hidden;" headerText="Nome">
+		                                    <h:outputText value="#{usuario.primeiroNome}" />
+		                                </p:column>  
+		                               	                          
+		                           		<p:column style="text-align: center; width: 120px;" headerText="Detalhes"> 
+		                           				             
+		                           			<p:commandButton value="Detalhes" onclick="PF(#{usuario.id}).show();" type="button" />                               		
+		                               		<p:dialog width="600" modal="true" appendTo="@(body)" header="Detalhes" 
+		                             				 widgetVar="#{usuario.id}" hideEffect="clip" showEffect="clip">                               
+		                               		                
+		                               		         <ui:fragment rendered="#{filtro.meustelefones(usuario) != null}"  >
+		                               		                           				                           		
+					                           			<p:outputLabel  style="font-size:20px; font-weight: bold" value="Telefones" />                               	
+					                                	<p:carousel value="#{filtro.meustelefones(usuario)}" var="fone" style="width:200px" circular="true"
+					                                	itemStyle="height:65px; width: 100%; text-align:center" numVisible="1" easing="easeOutBounce" >				                                	
+													    
+													        <h:panelGrid columns="2" style="width:100%" columnClasses="label,value">
+													            								 
+													            <h:outputText value="DDD:" />
+													            <h:outputText value="#{fone.ddd}" />
+													 
+													            <h:outputText value="Número:" />
+													            <h:outputText value="#{fone.numero}" />								 
+													           
+													        </h:panelGrid>
+													    </p:carousel>     
+												   	
+												   	 </ui:fragment>       											   	
+												   	
+												   	<br/><br/>
+												   	<h:outputText style="font-size:20px;" value="Primeiro nome: #{usuario.primeiroNome}" /> <br/>
+												   	<h:outputText style="font-size:20px;" value="Último nome: #{usuario.ultimoNome}" /> <br/>
+												   	<h:outputText style="font-size:20px;" value='Habilitado: #{usuario.habilitado ? "sim" : "não" }' /> <br/> 
+												    <h:outputText style="font-size:20px;" value='Senha: #{usuario.senha}' /> <br/> 
+												    											    
+										    </p:dialog>
+						
+									                             
+		                                </p:column>      
+		                                                        
+		                                <p:column style="text-align: center; width: 25px;" >
+		                                	<p:commandLink ajax="false" actionListener="#{cadastroUsuario.dadosUsuario(usuario)}" 
+		                                								 action="/admin/editarUsuario.xhtml">
+		                                	
+		                                    	<p:graphicImage style="width:20px; height:20px" library="imagens" name="edit.png"/>		                                    
+		                                    	
+		                                    </p:commandLink>
+		                                </p:column> 	
+		                                
+		                                <p:column style="text-align: center; width: 25px;" >
+		                                	<p:commandLink disabled="#{usuario.email == cadastroUsuario.usuario.email}" ajax="false" actionListener="#{cadastroUsuario.excluir(usuario.id)}" >
+		                                	
+		                                    	<p:graphicImage style="width:20px; height:20px" library="imagens" name="delete.png"/>		                                    
+		                                    	
+		                                    </p:commandLink>
+		                                </p:column>                            	                                
+		                
+		                                
+		                            </p:dataTable>                                                                                                        
+		                            
+		                        </h:form>           	                        
+                                                     
+                        
+                </p:layoutUnit>
+
+            </p:layout>
+            
+        </h:body>
+
+    </f:view>
+</html>
+

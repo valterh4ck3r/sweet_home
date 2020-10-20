@@ -16,28 +16,28 @@
         <h:form>
             <h:panelGrid id="formcadastro">
                                 	                            
-                <h:outputText value="Email: " />
+                <p:outputLabel value="Email: " />
                 <p:inputText id="email" maxlength="100" required="true"
                              value="#{cadastroUsuario.email}" binding="#{cadastroUsuario.campoInvalido}"
                              requiredMessage=" O campo email deve ser preenchido!" />      
                 <p:message for="email" style="color:red"/>
                 
-                <h:outputText value="Senha:" />
+                <p:outputLabel value="Senha:" />
                 
-                <p:password id="senha" maxlength="200" required="true" 
+                <p:password id="senha" maxlength="20" required="true" 
                             value="#{cadastroUsuario.senha}" feedback="true"
                             requiredMessage=" O campo senha deve ser preenchido!"
                             promptLabel="Digite uma senha" weakLabel="Senha fraca"
                             goodLabel="Senha boa" strongLabel="Senha forte" />
                 <p:message for="senha" style="color:red"/>
                 
-                <h:outputText value="Nome:" />
+                <p:outputLabel value="Nome:" />
                 <p:inputText id="primeiro_nome" maxlength="50" required="true" 
                              requiredMessage=" O campo nome deve ser preenchido!"
                              value="#{cadastroUsuario.nome}" />
                 <h:message for="primeiro_nome" style="color:red"/>
 
-                <h:outputText value="Sobrenome:" />
+                <p:outputLabel value="Sobrenome:" />
                 <p:inputText id="ultimo_nome" maxlength="50" required="true"
                              requiredMessage=" O campo sobrenome deve ser preenchido!"
                              value="#{cadastroUsuario.sobrenome}" />
@@ -47,7 +47,7 @@
             <p></p>            
             <br></br>
             
-            <h:commandButton action="#{cadastroUsuario.cadastrar()}" ajax="false" value="Cadastrar" />          
+            <p:commandButton action="#{cadastroUsuario.cadastrar()}" ajax="false" value="Cadastrar" />          
             
         </h:form>
         

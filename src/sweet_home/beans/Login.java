@@ -24,7 +24,6 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 
-
 @ManagedBean(name = "login")
 @RequestScoped
 public class Login implements Serializable {
@@ -50,7 +49,7 @@ public class Login implements Serializable {
               if(user != null) {
                     if(user.getSenha().equals(senha)) {
                              
-                        HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                        HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
                         sessao.setAttribute("logado", user);
                         if(tipo.equals("Usuario")) return "encontrado";
                         else return "admin";                    

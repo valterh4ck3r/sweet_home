@@ -1,9 +1,12 @@
 package sweet_home;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageFilter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -32,7 +35,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.io.IOUtils;
 import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 @Entity
 @Table(name = "TB_IMOVEL")
@@ -43,31 +48,46 @@ import org.primefaces.model.DefaultStreamedContent;
                     query = "SELECT b FROM Imovel b WHERE b.banheiros = ?1"
             ),
             @NamedQuery(
+                    name = "Imovel.RecuperarPorQuartos",
+                    query = "SELECT q FROM Imovel q WHERE q.quartos = ?1"
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorSalas",
+                    query = "SELECT s FROM Imovel s WHERE s.salas = ?1"
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorTipo",
+                    query = "SELECT t FROM Imovel t WHERE t.tipo = ?1"
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorSalas",
+                    query = "SELECT s FROM Imovel s WHERE s.salas = ?1"
+            ),
+            @NamedQuery(
                     name = "Imovel.RecuperarImoveis",
                     query = "SELECT i FROM Imovel i"
             ),
             @NamedQuery(
-                    name = "Imovel.RecuperarPorSalaReuniao",
-                    query = "SELECT r FROM Imovel r WHERE r.salareuniao = ?1"
+                    name = "Imovel.RecuperarPorCidade",
+                    query = "SELECT i FROM Imovel i WHERE i.endereco IN (SELECT e FROM Endereco e WHERE e.cidade = ?1)"
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorEstado",
+                    query = "SELECT i FROM Imovel i WHERE i.endereco IN (SELECT e FROM Endereco e WHERE e.estado = ?1)"
             ),
             @NamedQuery(
                     name = "Imovel.RecuperarPorUsuario",
                     query = "SELECT i FROM Imovel i WHERE i.usuario = ?1"
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorId",
+                    query = "SELECT i FROM Imovel i WHERE i.id = ?1"
             )
           
         }
 )
-//@NamedNativeQueries(
-//        
-//		{
-//            @NamedNativeQuery(
-//                    name = "Imovel.RecuperarImoveis",
-//                    query = "SELECT * FROM TB_IMOVEL",
-//                    resultClass = Endereco.class
-//            )
-//        
-//        }
-//)
+
+
 @Access(AccessType.FIELD)
 @ManagedBean
 @RequestScoped
@@ -92,7 +112,7 @@ public class Imovel extends Entidade {
     @Column(name = "SALAS")
     private int salas;
     
-    @NotNull
+    
     @Column(name = "DESCRICAO")
     private String descricao;
     
@@ -104,10 +124,27 @@ public class Imovel extends Entidade {
     @Column(name = "VALOR")
     private double valor;
           
+    @NotNull
+    @Column(name = "PISCINA")
+    private boolean piscina;
+
+    @NotNull
+    @Column(name = "GARAGEM")
+    private boolean garagem;
+    
+    @NotNull
+    @Column(name = "SALA_REUNIAO")
+    private boolean salaReuniao;
+    
+    @NotNull
+    @Column(name = "BEIRA_MAR")
+    private boolean beiraMar;
+    
     @Lob
     @ElementCollection
     @Column(name = "IMAGENS")
-    private List<byte[]> imagens;        
+    private List<byte[]> imagens;
+        
     
     @NotNull
     @ManyToOne
@@ -117,37 +154,11 @@ public class Imovel extends Entidade {
     @JoinColumn(name = "ID_ENDERECO  ", referencedColumnName = "ID")
     private Endereco endereco;
     
-    @NotNull
-    @Column(name = "GARAGEM")
-    private boolean garagem;
-    
-    @NotNull
-    @Column(name = "PISCINA")
-    private boolean piscina;
-    
-    @NotNull
-    @Column(name = "BEIRAMAR")
-    private boolean beiramar;
-    
-    @NotNull
-    @Column(name = "SALAREUNIAO")
-    private boolean salareuniao;
-    
-    @NotNull
-    @Column(name = "METROS")
-    private int metros;
-    
-    @Column(name="NOTA")
-    private Long nota;
-    
-    @Column(name= "QUANTIDADENOTA")
-    private Long quantidadeNota;
-    
     public Imovel() {
     	
     }
     
-    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco , boolean garagem, boolean piscina , boolean beiramar, boolean salareuniao , int metros, long nota, long quantidadeNota) {
+    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, boolean piscina, boolean garagem, boolean salaReuniao, boolean beiraMar, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco) {
     	
     	this.id = id;
     	this.quartos= quartos;
@@ -156,16 +167,13 @@ public class Imovel extends Entidade {
     	this.descricao = descricao;
     	this.tipo = tipo;
     	this.valor = valor;
+    	this.piscina = piscina;
+    	this.garagem = garagem;
+    	this.salaReuniao = salaReuniao;
+    	this.beiraMar = beiraMar;
     	this.usuario = usuario;
     	this.endereco = endereco;    	
     	this.imagens = imagens;
-    	this.garagem = garagem;
-        this.piscina = piscina;
-    	this.beiramar = beiramar;
-    	this.salareuniao = salareuniao;
-    	this.metros = metros;
-    	this.nota = nota;
-    	this.quantidadeNota = quantidadeNota;
     }
     
     public Long getId() {
@@ -224,6 +232,38 @@ public class Imovel extends Entidade {
         this.valor = valor;
     }
     
+    public boolean getPiscina() {
+    	return piscina;
+    }
+    
+    public void setPiscina(boolean piscina) {
+    	this.piscina = piscina;
+    }
+    
+    public boolean getGaragem() {
+    	return garagem;
+    }
+    
+    public void setGaragem(boolean garagem) {
+    	this.garagem = garagem;
+    }
+    
+    public boolean getSalaReuniao() {
+    	return salaReuniao;
+    }
+    
+    public void setSalaReuniao(boolean salaReuniao) {
+    	this.salaReuniao = salaReuniao;
+    }
+    
+    public boolean getBeiraMar() {
+    	return beiraMar;
+    }
+    
+    public void setBeiraMar(boolean beiraMar) {
+    	this.beiraMar = beiraMar;
+    }
+    
     public List<byte[]> getImagens() {
     	return imagens;
     }
@@ -248,59 +288,37 @@ public class Imovel extends Entidade {
         this.endereco = endereco;
         //this.endereco.setImovel(this);
     }
-
-    public boolean isGaragem() {
-		return garagem;
-	}
-
-	public void setGaragem(boolean garagem) {
-		this.garagem = garagem;
-	}
-
     
-    public boolean isPiscina() {
-		return piscina;
-	}
-
-	public void setPiscina(boolean piscina) {
-		this.piscina = piscina;
-	}
-
-	public boolean isBeiramar() {
-		return beiramar;
-	}
-
-	public void setBeiramar(boolean beiramar) {
-		this.beiramar = beiramar;
-	}
-	
-	public boolean isSalaReuniao() {
-		return salareuniao;
-	}
-
-	public void setSalaReuniao(boolean salareuniao) {
-		this.salareuniao = salareuniao;
-	}
-
-	public static byte[] imagetoBytes(String name) {
+    public static byte[] imagetoBytes(String name) {
     	
     	byte[] imageInByte = null;
     	
     	try {
-	    	BufferedImage imagem = ImageIO.read(new File(name));
-	    	ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	    	ImageIO.write( imagem, "jpg", baos );
-	    	baos.flush();
-	    	imageInByte = baos.toByteArray();
-	    	baos.close();
+    		InputStream stream = new FileInputStream(name);    		
+    		imageInByte = IOUtils.toByteArray(stream);
+    		return imageInByte;
     	}
     	catch(IOException e) {}
     	return imageInByte;
     }
 
-    public DefaultStreamedContent byteToStream(byte[] img) {    	
+    public StreamedContent byteToStream(byte[] img) {    	
+    	
     	InputStream stream = new ByteArrayInputStream(img);
-    	return new DefaultStreamedContent(stream);
+    	StreamedContent content = new DefaultStreamedContent(stream);
+    	return content;
+    }
+    
+    public int imgAltura(byte[] img) {
+    	
+    	try {
+	        ByteArrayInputStream bais = new ByteArrayInputStream(img);
+	        BufferedImage image = ImageIO.read(bais);	
+	        int h = image.getHeight();
+	        int w = image.getWidth();        
+	        return (550*h)/w;
+    	}catch(IOException e) {e.printStackTrace();}
+    	return 370;
     }
     
     
@@ -324,39 +342,5 @@ public class Imovel extends Entidade {
         
         return true;
     }
-
-	public boolean isSalareuniao() {
-		return salareuniao;
-	}
-
-	public void setSalareuniao(boolean salareuniao) {
-		this.salareuniao = salareuniao;
-	}
-
-	public int getMetros() {
-		return metros;
-	}
-
-	public void setMetros(int metros) {
-		this.metros = metros;
-	}
-	
-	public long getNota(){
-    	return nota;
-    }
-    
-    public void setNota(Long nota) {
-    	this.nota = nota;
-    }
-    
-    public long getQuantidadeNota(){
-    	return quantidadeNota;
-    }
-    
-    public void setQuantidadeNota(Long quantidadeNota) {
-    	this.quantidadeNota = quantidadeNota;
-    }
-    
-    
     
 }

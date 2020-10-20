@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
@@ -97,10 +96,10 @@ public class Endereco extends Entidade {
     @NotNull
     @Column(name = "CEP")
     private String CEP;
-           
+       
+    
     @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
     private Imovel imovel;
-
 
     
     public Endereco() {
@@ -181,7 +180,8 @@ public class Endereco extends Entidade {
     public void setImovel(Imovel imovel) {
         this.imovel = imovel;
         //this.imovel.setEndereco(this);
-    }    
+    }
+    
     
     @Override
     public int hashCode() {

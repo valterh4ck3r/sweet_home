@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+           
+    <f:view contentType="text/html">
+        <h:head>
+            <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+            <h:outputStylesheet library="css" name="main.css" />            
+            <h:outputScript library="js" name="index.js"  />
+                        
+        </h:head>
+        
+
+        <h:body style="background-color: #A0AEC0" >
+            
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="0" resizable="true" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    
+                </p:layoutUnit>
+
+                
+                <p:layoutUnit position="west" size="210" header="Servicos" collapsible="true">
+                    <h:form>
+	                    <p:menu>
+	                        <p:submenu label="Opções">                            	
+	                            	
+	                 			<p:menuitem ajax="false" action="/admin/meusImoveis.xhtml" value="Seus imóveis"/>	                 			
+	                 			<p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/admin/todosImoveis.xhtml" value="Todos os imóveis"/>	                                             
+	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(1)}" action="/admin/todosImoveis.xhtml" value="Filtrar imóvel"/>                              
+	                            <p:menuitem ajax="false" actionListener="#{cadastroImovel.cadastro()}" action="/admin/editarImovel" value="Cadastrar imóvel"/>	
+	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/admin/usuarios.xhtml" value="Usuários"/>                            	                            
+	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/admin/index.xhtml" value="Tela inicial"/>                 
+	                            	           
+	                        </p:submenu>
+	
+	                    </p:menu>
+                    
+                    	                    
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                
+                	
+                	<p:outputLabel style="font-size:30px; font-weight: bold" value="Editar usuário" />  <br/><br/><br/>
+                                							
+					
+					<h:form id="form">						                         
+		                                          
+		            		<h:panelGrid id="panel" columns="2" cellpadding="5">
+		                                          					    
+							                        
+		                        <p:outputLabel for="nome" style="font-weight: bold" value="Primeiro nome: " />
+		                         <p:inputText id="nome" value="#{cadastroUsuario.nome}" />
+		                        		                        
+		                                           
+		                        <p:outputLabel for="sobrenome" style="font-weight: bold" value="Último nome: " /> 
+		                        <p:inputText id="sobrenome" value="#{cadastroUsuario.sobrenome}" />
+		                                         		                                         
+		                                         		                                         
+		                        <p:outputLabel for="email" style="font-weight: bold" value="Email: " /> 
+		                        <p:inputText id="email" value="#{cadastroUsuario.email}" />                                   		                                         
+		                                          	    
+		                                          	    
+		                        <p:outputLabel for="senha" style="font-weight: bold" value="Senha: " /> 
+			                    <h:panelGrid columns="2">
+			                        <p:inputText id="senha" maxlength="20" required="true" 
+					                            value="#{cadastroUsuario.senha}" feedback="true"
+					                            requiredMessage=" O campo senha deve ser preenchido!"
+					                            promptLabel="Digite uma senha" />
+					                <p:message for="senha" style="color:red"/>
+								</h:panelGrid>	                                                            
+		                                                                                 
+		                           
+		                        <p:outputLabel for="habilitado" style="font-weight: bold" value="Habilitado:" /> 
+		                            <p:selectOneMenu id="habilitado" value="#{cadastroUsuario.habilitado}" style="width:125px">
+		                                <f:selectItem itemLabel="Sim" itemValue="1" />
+		                                <f:selectItem itemLabel="Não" itemValue="0" />    		                                                            
+		                            </p:selectOneMenu>
+		                        		                                                
+		                       
+		                        <p:outputLabel rendered="#{cadastroUsuario.telefones != null}" style="font-weight: bold;" value="Seus telefones:" />
+		                    	
+			                        <p:accordionPanel rendered="#{cadastroUsuario.telefones != null}" id="accordion" tabindex="true" activeIndex="1" style="width: 200px; overflow-x: hidden;" >
+								        <p:tab title="Telefones">
+								           <p:dataTable id="tabela" style="width:200px; margin-top:-17px; margin-left:-40px ; overflow-x: hidden;" rendered="#{cadastroUsuario.telefones != null}" var="telefone" value="#{cadastroUsuario.telefones}" >
+								           		<p:column id="a#{telefone.id}" style="text-align: center; width: 20px;" headerText="DDD">
+				                                    <h:outputText value="#{telefone.ddd}" />
+				                                </p:column>   
+				                                <p:column id="b#{telefone.id}" style="text-align: center; width: 70px; " headerText="Número">
+				                                    <h:outputText value="#{telefone.numero}" />
+				                                </p:column>  
+				                                <p:column id="c#{telefone.id}" style="text-align: center; width: 10px;" >
+				                                	<p:commandLink id="excluir" action="#{cadastroUsuario.excluirTelefone(telefone.id)}" immediate="true" >
+				                                	
+				                                    	<p:graphicImage style="width:20px; height:20px" library="imagens" name="delete.png"/>		                                    
+				                                    	<f:ajax event="click" render="accordion tabela" />
+				                                    	
+				                                    </p:commandLink>
+				                                </p:column>      
+								           
+								           </p:dataTable>						           
+								        </p:tab>
+								    </p:accordionPanel>
+		                        		                      
+		                         		                                                      
+		                         <p:outputLabel style="font-weight: bold;" value="Adicionar telefone:" />
+			                         <h:panelGrid columns="2" >   
+			                         	
+			                         	<p:inputText id="fone" onkeyup="mascaraFone(this.id)" onkeydown="mascaraFone(this.id)" value="#{cadastroUsuario.fone}" /> 
+										<p:commandButton id="inserir" action="#{cadastroUsuario.inserirFone()}" immediate="true" value="Adicionar" >
+					                            					                           			                                    
+					                           	<f:ajax event="click" execute="fone inserir" render="fone" />
+					                                    	
+					                    </p:commandButton>
+		
+			                         </h:panelGrid>
+		                         
+		                         
+		                         
+		                         
+		                    </h:panelGrid>        
+		                    
+		                     <br/><br/>
+		                     <p:commandButton ajax="false" value="Enviar" action="#{cadastroUsuario.editar()}" />
+						     
+						     <ui:fragment rendered="#{cadastroImovel.editar == true}">
+									<p:commandButton style="margin-left: 10px;" value="Restaurar" update="form" process="@this" /> 
+							 </ui:fragment>		                
+				 			 
+				 			 <ui:fragment rendered="#{cadastroImovel.editar == false}">
+									<p:commandButton style="margin-left: 10px;" value="Limpar" update="panel" process="@this" >
+						                <p:resetInput target="panel" />
+						            </p:commandButton> 
+							 </ui:fragment>		 
+				 			 
+				 	<br/>    <p:outputLabel binding="#{cadastroUsuario.mybutton}" id="btn" />
+                        		<a style="color:red; font-size: 20px"><h:message for="btn" /></a>                   
+		                            
+		               </h:form>       
+                        
+                </p:layoutUnit>
+
+            </p:layout>
+            
+        </h:body>
+
+    </f:view>
+</html>
+

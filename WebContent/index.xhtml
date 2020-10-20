@@ -28,177 +28,23 @@
                 
                 <p:layoutUnit position="west" size="210" header="Servicos" collapsible="true">
                     <h:form>
-                    <p:menu>
-                        <p:submenu label="Opções">
-                            
-                 			<p:menuitem action="/usuario/meusImoveis.xhtml" value="Seus imóveis"/>
-                            <p:menuitem action="/usuario/todosImoveis.xhtml" value="Todos os imóveis"/>
-                            	           
-                        </p:submenu>
-
-                    </p:menu>
+	                    <p:menu>
+	                        <p:submenu label="Opções">                            	
+	                            	
+	                 			<p:menuitem ajax="false" action="#{utils.direcionarMeusImoveis}" value="Seus imóveis"/>
+	                            <p:menuitem ajax="false" action="#{utils.direcionarTodosImoveis}" value="Todos os imóveis"/>
+	                            	           
+	                        </p:submenu>
+	
+	                    </p:menu>
+                    
+                    	                    
                     </h:form>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                                         
-                    <br/>
-
-                    <h:form>
-                        <p>Filtrar Imóveis com Garagem
-                            <h:selectBooleanCheckbox title="Filtrar Imóveis com Garagem" value="#{cadastroImovel.filtrarGaragem}" id="chexkboxGaragem" /> 
-                        </p>
-                        <br/>
-                        <p>Filtrar Imóveis com Piscina 
-                            <h:selectBooleanCheckbox title="Filtrar Imóveis com Piscina" value="#{cadastroImovel.filtrarPiscina}" id="chexkboxPiscina" /> 
-                        </p>
-                        <br/>
-                        <p>Filtrar Imóveis com Beira Mar 
-                            <h:selectBooleanCheckbox title="Filtrar Imóveis Beira Mar" value="#{cadastroImovel.filtrarBeiraMar}" id="chexkboxBeiraMar" /> 
-                        </p>
-                        <br/>
-                        <p>Filtrar Imóveis com Sala de Reunião
-                            <h:selectBooleanCheckbox title="Filtrar Imóveis Sala de Reunião" value="#{cadastroImovel.filtrarSalaReuniao}" id="chexkboxSalaReuniao" /> 
-                        </p>
-
-                        <br/>
-                        <br/>
-                        
-                        Filtrar por Quantidade de Quartos:   
-                            <h:selectOneMenu value="#{cadastroImovel.filtrarQuantidadeQuartos}">
-                                <f:selectItem itemValue="0" itemLabel="Selecione" />
-                                <f:selectItem itemValue="1" itemLabel="1 quarto" />
-                                <f:selectItem itemValue="2" itemLabel="2 quartos" />
-                                <f:selectItem itemValue="3" itemLabel="3 quartos" />
-                                <f:selectItem itemValue="4" itemLabel="4 quartos" />
-                                <f:selectItem itemValue="5" itemLabel="5 quartos" />
-                                <f:selectItem itemValue="6" itemLabel="6 quartos" />
-                            </h:selectOneMenu>
-                        
-
-                        <br/>
-                        <br/>                        
-                        <br/>
-                        <br/>
-
-                        Filtrar por Metros Quadrados  (m²)
-                        <br/>
-                        <br/>
-                        <h:inputText value="#{cadastroImovel.filtrarMetrosQuadradosMinimo}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>&nbsp;&nbsp;&nbsp;entre&nbsp;&nbsp;&nbsp;
-                        <h:inputText value="#{cadastroImovel.filtrarMetrosQuadradosMaximo}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
-
-                        <p:outputLabel binding="#{cadastroImovel.metrosMessage}" id="metrosMessage" />
-                        <a style="color:red; font-size: 20px"><h:message for="metrosMessage" /></a>
-                        
-                    
-
-                    <br/>
-                    <br/>                    
-                    <br/>
-                    <br/>
-
-
-                        <h:commandButton value="Pesquisar" action="#{cadastroImovel.carregarImoveis}" />
-					    <h:messages />
-					</h:form>
-
-                    <br/>
-                    <br/>
-                                                                     
-                                      
-                    <h:form>
-                       
-                            <p:dataTable id="imoveis" var="listaImovel" value="#{cadastroImovel.carregarImoveis()}" rowKey="#{listaImovel.id}" >
-                                <f:facet name="header">
-                                    Imóveis 
-                                </f:facet>  
-                                <p:column style="text-align: center; width: 11%" headerText="Salas">
-                                    <h:outputText value="#{listaImovel.salas}" />
-                                </p:column>   
-                                <p:column style="text-align: center; width: 10%" headerText="Quartos">
-                                    <h:outputText value="#{listaImovel.quartos}" />
-                                </p:column>  
-                                 <p:column style="text-align: center; width: 11%" headerText="Banheiros">
-                                    <h:outputText value="#{listaImovel.banheiros}" />
-                                </p:column>  
-                                <p:column style="text-align: center; width: 10%" headerText="Metros quadrados">
-                                    <h:outputText value="#{listaImovel.metros}" />
-                                </p:column> 
-                                 <p:column style="text-align: center; width: 19%" headerText="Descrição">
-                                    <h:outputText value="#{listaImovel.descricao}" />
-                                </p:column>  
-                                <p:column style="text-align: center; width: 9%" headerText="Tipo">
-                                	<ui:fragment rendered="#{listaImovel.tipo == 1}">
-									    <h:outputText value="Casa"/> 
-									</ui:fragment>
-                                	<ui:fragment rendered="#{listaImovel.tipo == 2}">
-									    <h:outputText value="Apartamento"/> 
-									</ui:fragment>
-									<ui:fragment rendered="#{listaImovel.tipo == 3}">
-									    <h:outputText value="Terreno"/> 
-									</ui:fragment>                                    
-                                </p:column> 
-                                
-                                <p:column style="text-align: center; width: 12%" headerText="Valor">
-                                    <h:outputText value="R$ #{listaImovel.valor}" />
-                                </p:column> 
-                           
-                                <p:column style="text-align: center; width: 220px" headerText="Responsável">                                	
-                                	<p:carousel value="#{utils.telefones(listaImovel.usuario.email)}" headerText="#{listaImovel.usuario.primeiroNome}" 
-                                	var="fone" itemStyle="height:65px;text-align:center" numVisible="1" easing="easeOutBounce" 
-                                	style="width:200px" circular="true">
-								    
-								        <h:panelGrid columns="2" style="width:100%" columnClasses="label,value">
-								            								 
-								            <h:outputText value="DDD:" />
-								            <h:outputText value="#{fone.ddd}" />
-								 
-								            <h:outputText value="Numero" />
-								            <h:outputText value="#{fone.numero}" />								 
-								           
-								        </h:panelGrid>
-								    </p:carousel>     
-								   	
-								   	<br></br>
-								   	<h:outputText value="#{listaImovel.usuario.email}" />
-								                             
-                                </p:column> 
-                                
-                                <p:column style="text-align: center; width: 12%" headerText="Endereço">
-									
-									<p:commandButton value="Exibir Endereço" onclick="PF('dlg').show();" type="button" />                               		
-                               		<p:dialog width="300" modal="true" appendTo="@(body)" header="Busca localizada" 
-                             				 widgetVar="dlg" hideEffect="fade" showEffect="fade">                               
-                               
-		                                   <h:outputText value="Número: #{listaImovel.endereco.numero}" />         
-		                                   <h:outputText value="Rua: #{listaImovel.endereco.rua}" />
-		                                   <h:outputText value="Bairro: #{listaImovel.endereco.bairro}" /> 
-		                                   <h:outputText value="Cidade: #{listaImovel.endereco.cidade}" />                                                    
-		                                   <h:outputText value="Estado: #{listaImovel.endereco.estado}" />                                
-                                
-                                	</p:dialog>
-                                
-                                </p:column> 
-                                
-                                <!-- <p:column style="text-align: center; width: 12%" headerText="Imagens">
-                                                                       
-                                    <p:carousel value="#{listaImovel.imagens}" headerText="Imagens" 
-                                	var="img" itemStyle="height:65px;text-align:center" numVisible="1" easing="easeOutBounce" 
-                                	style="width:200px" circular="true">
-								    
-								        <h:panelGrid columns="1" style="width:100%" columnClasses="label,value">
-								            								 
-								            <p:graphicImage value="#{imovel.byteToStream(img)}" height="180px" width="250px"/>						 
-								           
-								        </h:panelGrid>
-								    </p:carousel>                                       
-                                                           
-                                </p:column>  -->
-                                
-                            </p:dataTable>                        
-                                                      
-                            
-                        </h:form>                      
+                      
+                   
                         
                 </p:layoutUnit>
 

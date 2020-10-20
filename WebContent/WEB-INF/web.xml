@@ -15,7 +15,21 @@
        </session-timeout>
    </session-config>
    
-  <welcome-file-list>
-    <welcome-file>indexLogin.xhtml</welcome-file>
-  </welcome-file-list>
+   <context-param>
+   		<param-name>primefaces.UPLOADER</param-name>
+    	<param-value>commons</param-value>
+   </context-param>
+   <filter>
+    	<filter-name>FileUploadFilter</filter-name>
+    	<filter-class>org.primefaces.webapp.filter.FileUploadFilter</filter-class>
+   </filter>
+   <filter-mapping>
+    	<filter-name>FileUploadFilter</filter-name>
+    	<servlet-name>Faces Servlet</servlet-name>
+   </filter-mapping>      
+   
+   <welcome-file-list>
+    	<welcome-file>indexLogin.xhtml</welcome-file>    
+   </welcome-file-list>
+   
 </web-app>

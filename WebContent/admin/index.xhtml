@@ -9,16 +9,18 @@
     <f:view contentType="text/html">
         <h:head>
             <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+            <h:outputStylesheet library="css" name="main.css" />            
             
         </h:head>
         
 
-        <h:body >
+        <h:body style="background-color: #A0AEC0" >
             
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="0" resizable="true" closable="true" collapsible="true">
                     
+                  
                 </p:layoutUnit>
 
                 <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
@@ -28,21 +30,25 @@
                 
                 <p:layoutUnit position="west" size="210" header="Servicos" collapsible="true">
                     <h:form>
-                    <p:menu>
-                        <p:submenu label="Opções">
-                            
-                 			<p:menuitem ajax="false" action="/admin/meusImoveis.xhtml" value="Seus imóveis"/>
-                            <p:menuitem ajax="false" action="/admin/todosImoveis.xhtml" value="Todos os imóveis"/>
-                            	           
-                        </p:submenu>
-
-                    </p:menu>
+	                    <p:menu>
+	                        <p:submenu label="Opções">                            	
+	                            	
+	                 			<p:menuitem ajax="false" action="/admin/meusImoveis.xhtml" value="Seus imóveis"/>
+	                            <p:menuitem ajax="false" action="/admin/todosImoveis.xhtml" value="Todos os imóveis"/>
+	                            <p:menuitem ajax="false" actionListener="#{cadastroImovel.cadastro()}" action="/admin/editarImovel" value="Cadastrar imóvel"/>	
+	                            <p:menuitem ajax="false" action="/admin/usuarios.xhtml" value="Usuários"/>                            
+	                            	           
+	                        </p:submenu>
+	
+	                    </p:menu>
+                    
+                    	                    
                     </h:form>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                                         
-                  
+                    
+                                  		
                         
                 </p:layoutUnit>
 

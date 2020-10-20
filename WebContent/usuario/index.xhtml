@@ -13,7 +13,7 @@
         </h:head>
         
 
-        <h:body >
+        <h:body style="background-color: #A0AEC0" >
             
             <p:layout fullPage="true">
 
@@ -28,21 +28,25 @@
                 
                 <p:layoutUnit position="west" size="210" header="Servicos" collapsible="true">
                     <h:form>
-                    <p:menu>
-                        <p:submenu label="Opções">
-                            
-                 			<p:menuitem ajax="false" action="/usuario/meusImoveis.xhtml" value="Seus imóveis"/>
-                            <p:menuitem ajax="false" action="/usuario/todosImoveis.xhtml" value="Todos os imóveis"/>
-                            	           
-                        </p:submenu>
-
-                    </p:menu>
+	                    <p:menu>
+	                        <p:submenu label="Opções">                            	
+	                            	
+	                 			<p:menuitem ajax="false" action="/usuario/meusImoveis.xhtml" value="Seus imóveis"/>
+	                            <p:menuitem ajax="false" action="/usuario/todosImoveis.xhtml" value="Todos os imóveis"/>
+	                            <p:menuitem ajax="false" actionListener="#{cadastroImovel.cadastro()}" action="/usuario/editarImovel" value="Cadastrar imóvel"/>	
+	                            <p:menuitem ajax="false" actionListener="#{cadastroUsuario.dadosPessoais()}" action="/usuario/editarUsuario.xhtml" value="Editar dados pessoais"/>                            
+	                            	           
+	                        </p:submenu>
+	
+	                    </p:menu>
+                    
+                    	                    
                     </h:form>
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                                         
-                  
+                      
+               
                         
                 </p:layoutUnit>
 

@@ -1,6 +1,7 @@
 package sweet_home.beans;
 
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -15,69 +16,71 @@ import sweet_home.servico.TelefoneServico;
 import sweet_home.servico.UsuarioServico;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Default;
 import javax.faces.annotation.FacesConfig;
 import javax.faces.annotation.FacesConfig.Version;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 
 import org.apache.commons.io.IOUtils;
 
 
-@Named("utils")
-@ViewScoped
+@ManagedBean
+@RequestScoped
 public class Utils implements Serializable {
 
 private static final long serialVersionUID = 1L;
 	
-	@Inject
+	@EJB
     private ImovelServico imovelServico; 
-	@Inject
+	@EJB
     private TelefoneServico telefoneServico; 
-	@Inject
+	@EJB
     private UsuarioServico usuarioServico; 
 	
     private static List<Imovel> listaImoveis = null;
     private static List<Telefone> listaTelefones = null;
-    
+    private static Usuario usuario = null;
+            
     
     @PostConstruct
-    public void init() {
-        listaImoveis = imovelServico.recuperarImoveis();
-        listaTelefones = telefoneServico.consultarTelefones();
+    public void init() {    	            
+    	
+       	HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+    	usuario = (Usuario) sessao.getAttribute("logado");
     }
         
    
     
-    public List<Telefone> telefones(String email) {
+    public List<Telefone> telefones(Usuario usuario) {
     	
-    	return listaTelefones.stream().filter(x -> x.getUsuario().getEmail().equals(email))
-    			.collect(Collectors.toList());
+    	return telefoneServico.recuperarPorUsuario(usuario);
     }
     
-    public List<Imovel> meusImoveis() {
-    	
-    	HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        Usuario usuarioLogado = (Usuario) sessao.getAttribute("logado");
-    	
-    	return listaImoveis.stream().filter(x -> x.getUsuario().getEmail().equals(usuarioLogado.getEmail()))
-    			.collect(Collectors.toList());
+            
+    public List<Imovel> meusimoveis() {
+             	    	   	
+    	return imovelServico.recuperarPorUsuario(usuario);   	    	
     }
+     
     
-    
-    public String direcionarMeusImoveis() {
-    	
-    	return "meusImoveis";
+    public List<Telefone> getListaTelefones() {
+    	listaTelefones = telefoneServico.consultarTelefones();
+        return listaTelefones;
     }
-    
-    
-    
-    
+        
+    public void setListaTelefones() {
+    	listaTelefones = telefoneServico.consultarTelefones();
+    }
     
     public List<Imovel> getListaImoveis() {
     	listaImoveis = imovelServico.recuperarImoveis();
@@ -88,16 +91,5 @@ private static final long serialVersionUID = 1L;
     	listaImoveis = imovelServico.recuperarImoveis();
     }
     
-    public List<Imovel> getListaTelefones() {
-    	listaImoveis = imovelServico.recuperarImoveis();
-        return listaImoveis;
-    }
-        
-    public void setListaTelefones() {
-    	listaImoveis = imovelServico.recuperarImoveis();
-    }
-    
-    
-    
-    
+       
 }

@@ -9,11 +9,13 @@
     <f:view contentType="text/html">
         <h:head>
             <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-            
+            <h:outputStylesheet library="css" name="main.css" />                      
+            <h:outputScript library="js" name="index.js" />
+     		     		   		
         </h:head>
         
 
-        <h:body >
+        <h:body style="background-color: #A0AEC0" >
             
             <p:layout fullPage="true">
 
@@ -27,132 +29,287 @@
 
                 
                 <p:layoutUnit position="west" size="210" header="Servicos" collapsible="true">
+                
                     <h:form>
-                    <p:menu>
-                        <p:submenu label="Opções">
-                            
-                 			<p:menuitem ajax="false" action="/usuario/index.xhtml" value="Voltar"/>
-                            <p:menuitem ajax="false" action="/admin/filtro.xhtml" value="Filtrar"/>
-                            	           
-                        </p:submenu>
-
-                    </p:menu>
+	                    <p:menu>
+	                        <p:submenu label="Opções">
+	                            	                 			                        
+	                            <p:menuitem ajax="false" rendered="#{filtro.filtrar == 0}" actionListener="#{filtro.setFiltrar(1)}" value="Filtrar imóveis"/>                           	           
+	                            <p:menuitem ajax="false" rendered="#{filtro.filtrar == 1}" actionListener="#{filtro.setFiltrar(0)}" value="Todos os imóveis"/>
+	                            <p:menuitem ajax="false" action="/usuario/meusImoveis.xhtml" value="Seus imóveis"/>
+	                            <p:menuitem ajax="false" rendered="#{cadastroImovel.cadastro()}" action="/usuario/editarImovel" value="Cadastrar imóvel"/>	
+	                            <p:menuitem ajax="false" actionListener="#{cadastroUsuario.dadosPessoais()}" action="/usuario/editarUsuario.xhtml" value="Editar dados pessoais"/>                            	                            
+	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/usuario/index.xhtml" value="Tela inicial"/>    
+	                            	           
+	                        </p:submenu>
+	
+	                    </p:menu>
                     </h:form>
+                    
                 </p:layoutUnit>
+                
 
                 <p:layoutUnit position="center">
-                                         
-                    <br/>
-                    <br/>
-
-                    <p:outputLabel binding="#{cadastroImovel.metrosMessage}" id="metrosMessage" />
-                    <a style="color:red; font-size: 20px"><h:message for="metrosMessage" /></a>
-
-                    <br/>
-                    <br/>
                                         
-                                                          
-                    <h:form>
-                       
-                            <p:dataTable id="imoveis" var="listaImovel" value="#{cadastroImovel.carregarImoveis()}" rowKey="#{listaImovel.id}" >
-                                <f:facet name="header">
-                                    Imóveis 
-                                </f:facet>
-                                <p:column style="text-align: center; width: 11%" headerText="Nota">
-                                    <h:outputText value="#{listaImovel.nota}" />
-                                </p:column>  
-                                <p:column style="text-align: center; width: 11%" headerText="Salas">
-                                    <h:outputText value="#{listaImovel.salas}" />
-                                </p:column>   
-                                <p:column style="text-align: center; width: 10%" headerText="Quartos">
-                                    <h:outputText value="#{listaImovel.quartos}" />
-                                </p:column>  
-                                 <p:column style="text-align: center; width: 11%" headerText="Banheiros">
-                                    <h:outputText value="#{listaImovel.banheiros}" />
-                                </p:column>  
-                                <p:column style="text-align: center; width: 10%" headerText="Metros quadrados">
-                                    <h:outputText value="#{listaImovel.metros}" />
-                                </p:column> 
-                                 <p:column style="text-align: center; width: 19%" headerText="Descrição">
-                                    <h:outputText value="#{listaImovel.descricao}" />
-                                </p:column>  
-                                <p:column style="text-align: center; width: 9%" headerText="Tipo">
-                                	<ui:fragment rendered="#{listaImovel.tipo == 1}">
-									    <h:outputText value="Casa"/> 
-									</ui:fragment>
-                                	<ui:fragment rendered="#{listaImovel.tipo == 2}">
-									    <h:outputText value="Apartamento"/> 
-									</ui:fragment>
-									<ui:fragment rendered="#{listaImovel.tipo == 3}">
-									    <h:outputText value="Terreno"/> 
-									</ui:fragment>                                    
-                                </p:column> 
-                                
-                                <p:column style="text-align: center; width: 12%" headerText="Valor">
-                                    <h:outputText value="R$ #{listaImovel.valor}" />
-                                </p:column> 
-                                
-                                <p:column style="text-align: center; width: 12%" headerText="Nota">
-                                    <h:outputText value="#{listaImovel.nota}" />
-                                </p:column>
-                           
-                                <p:column style="text-align: center; width: 220px" headerText="Responsável">                                	
-                                	<p:carousel value="#{utils.telefones(listaImovel.usuario.email)}" headerText="#{listaImovel.usuario.primeiroNome}" 
-                                	var="fone" itemStyle="height:65px;text-align:center" numVisible="1" easing="easeOutBounce" 
-                                	style="width:200px" circular="true">
-								    
-								        <h:panelGrid columns="2" style="width:100%" columnClasses="label,value">
-								            								 
-								            <h:outputText value="DDD:" />
-								            <h:outputText value="#{fone.ddd}" />
-								 
-								            <h:outputText value="Numero" />
-								            <h:outputText value="#{fone.numero}" />								 
-								           
-								        </h:panelGrid>
-								    </p:carousel>     
-								   	
-								   	<br></br>
-								   	<h:outputText value="#{listaImovel.usuario.email}" />
-								                             
-                                </p:column> 
-                                
-                                <p:column style="text-align: center; width: 12%" headerText="Endereço">
+                    
+                    <ui:fragment rendered="#{filtro.filtrar == 0}">
+                                                                              
+                                      
+		                    <h:form styleClass="font" >
+		                       
+		                            <p:dataTable id="imoveis" var="listaImovel" value="#{filtro.imoveis()}" rowKey="#{listaImovel.id}" >
+		                                <f:facet name="header">
+		                                    Imóveis 
+		                                </f:facet>  
+		                                
+		                                <p:column style="text-align: center; min-width: 50px; overflow: hidden;" headerText="Estado">
+		                                    <h:outputText value="#{listaImovel.endereco.estado}" />
+		                                </p:column>   
+		                                <p:column style="text-align: center; min-width: 70px; overflow: hidden;" headerText="Cidade">
+		                                    <h:outputText value="#{listaImovel.endereco.cidade}" />
+		                                </p:column>  
+		                                <p:column style="text-align: center; min-width: 70px; overflow: hidden;" headerText="Bairro">
+		                                    <h:outputText value="#{listaImovel.endereco.bairro}" />
+		                                </p:column>  
+		                                
+		                                <p:column style="text-align: center; min-width: 70px; overflow: hidden;" headerText="Tipo">
+		                                	<ui:fragment rendered="#{listaImovel.tipo == 1}">
+											    <h:outputText value="Casa"/> 
+											</ui:fragment>
+		                                	<ui:fragment rendered="#{listaImovel.tipo == 2}">
+											    <h:outputText value="Apartamento"/> 
+											</ui:fragment>
+											<ui:fragment rendered="#{listaImovel.tipo == 3}">
+											    <h:outputText value="Terreno"/> 
+											</ui:fragment>                                    
+		                                </p:column> 
+		                                
+		                                <p:column style="text-align: center; width: 120px;" headerText="Valor">
+		                                    <h:outputText value="R$ #{listaImovel.valor}" />
+		                                </p:column> 		                                
+		                                
+		                                
+		                           		<p:column style="text-align: center; width: 120px;" headerText="Detalhes"> 
+		                           				             
+		                           			<p:commandButton value="Detalhes" onclick="PF(#{listaImovel.id}).show();" type="button" />                               		
+		                               		<p:dialog width="600" modal="true" appendTo="@(body)" header="Detalhes" 
+		                             				 widgetVar="#{listaImovel.id}" hideEffect="clip" showEffect="clip">                               
+		                               		                           				                           		
+				                           			<p:outputLabel style="font-size:20px; font-weight: bold" value="Responsável" />                               	
+				                                	<p:carousel value="#{filtro.meustelefones(listaImovel.usuario)}" headerText="#{listaImovel.usuario.primeiroNome}" 
+				                                	var="fone" itemStyle="height:65px;text-align:center" numVisible="1" easing="easeOutBounce" 
+				                                	style="width:200px" circular="true">
+												    
+												        <h:panelGrid columns="2" style="width:100%" columnClasses="label,value">
+												            								 
+												            <h:outputText value="DDD:" />
+												            <h:outputText value="#{fone.ddd}" />
+												 
+												            <h:outputText value="Número:" />
+												            <h:outputText value="#{fone.numero}" />								 
+												           
+												        </h:panelGrid>
+												    </p:carousel>     
+												   	
+												   	<br/>
+												   	Email: <h:outputText value="#{listaImovel.usuario.email}" />
+												    
+												    <br/><br/>
+												    <p:outputLabel style="font-size:20px; font-weight: bold" value="Descrição:" />		<br/>               
+												    <h:outputText value="#{listaImovel.descricao}" /> 
+												    
+												    <br/><br/>
+												    <p:outputLabel style="font-size:20px;" value="Número de salas: #{listaImovel.salas}" />		<br/>
+												    <p:outputLabel style="font-size:20px;" value="Número de quartos: #{listaImovel.quartos}" />		<br/>
+												    <p:outputLabel style="font-size:20px;" value="Número de banheiros: #{listaImovel.banheiros}" />		<br/>
+												    <p:outputLabel style="font-size:20px;" value='Piscina: #{listaImovel.piscina ? "sim" : "não"}' />	<br/>
+												    <p:outputLabel style="font-size:20px;" value='Garagem: #{listaImovel.garagem ? "sim" : "não"}' />	<br/>
+												    <p:outputLabel style="font-size:20px;" value='Sala de reunião: #{listaImovel.salaReuniao ? "sim" : "não"}' />	<br/>
+												    <p:outputLabel style="font-size:20px;" value='Beira mar: #{listaImovel.beiraMar ? "sim" : "não"}' />
+												    													    
+												    <br/><br/>
+												    <p:outputLabel style="font-size:20px; font-weight: bold" value="Endereço:" />
+												    
+											<br/>   <h:outputText value="Número: #{listaImovel.endereco.numero}" /> <br/>        
+				                                   	<h:outputText value="#{listaImovel.endereco.rua}" />		<br/>
+				                                   	<h:outputText value="Bairro: #{listaImovel.endereco.bairro}" />		<br/> 
+				                                   	<h:outputText value="Cidade: #{listaImovel.endereco.cidade}" />		<br/>	                                                    
+				                                   	<h:outputText value="Estado: #{listaImovel.endereco.estado}" />     <br/>                      
+												    <h:outputText value="CEP: #{listaImovel.endereco.CEP}" />
+												    
+										    </p:dialog>
+						
+									                             
+		                                </p:column>      
+		                                                        
+		                                
+		                                <p:column style="text-align: center; width: 120px" headerText="Imagens">
+		                                                                       
+		                                	<p:commandButton value="Imagens" onclick="PF('imagem'+#{listaImovel.id}).show();" type="button" />                               		
+		                               		<p:dialog width="550" modal="true" appendTo="@(body)"  header="Imagens" 
+		                               					widgetVar="imagem#{listaImovel.id}" hideEffect="clip" showEffect="clip" dynamic="true" > 
+		                                
+			                                    <p:carousel value="#{listaImovel.imagens}" var="img" style="width:100%; min-height:200px; ;" 
+			                                    			itemStyle="width:100%;" numVisible="1" easing="easeOutBounce" circular="true">
+											    			            								 
+											          <p:graphicImage stream="false" value="#{imovel.byteToStream(img)}" height="#{imovel.imgAltura(img)}" width="100%"/>						 
+											    		        
+											    </p:carousel>     
+											    
+											</p:dialog>                                  
+		                                                           
+		                                </p:column> 
+		                                          
+		                                
+		                            </p:dataTable>                                                                                                        
+		                            
+		                        </h:form>           	                        
+                        
+                        </ui:fragment>
+                        
+                        
+                        
+                        <ui:fragment rendered="#{filtro.filtrar == 1}">                        
+                                                
+                        
+		                    <h:form id="form" styleClass="font" >
+		                    
+		                    	<p:outputLabel style="font-size:30px; font-weight: bold" value="Filtrar imóveis" />  <br/><br/><br/>
+		                    
+		                    	<h:panelGrid id="panel" columns="2" cellpadding="5">                        
+			                         
+			                        
+			                        <p:outputLabel for="tipo" style="font-weight: bold" value="Tipo:" />
+			                            <p:selectOneMenu id="tipo" value="#{filtro.tipo}" style="width:125px">
+			                                <f:selectItem itemLabel="Casa" itemValue="1" />
+			                                <f:selectItem itemLabel="Apartamento" itemValue="2" />
+			                                <f:selectItem itemLabel="Terreno" itemValue="3" />                                
+			                            </p:selectOneMenu>
+			                       			                       		                                      					    
+								                        
+			                        <p:outputLabel for="quartos" style="font-weight: bold" value="Número de quartos: " />
+			                        <p:inputText styleClass="mask" id="quartos" onkeydown="mascara(this.id)" onkeyup="mascara(this.id)"  value="#{filtro.quartos}" maxlength="3"                                         
+			                                         />                      
+			                        			                        
+			                        
+			                        <p:outputLabel for="banheiros" style="font-weight: bold" value="Número de banheiros: " />
+			                        <p:inputText styleClass="mask" id="banheiros" onkeydown="mascara(this.id)" onkeyup="mascara(this.id)" value="#{filtro.banheiros}" maxlength="3"                                         
+			                                         />
+			                                         		                                         
+			                        			                        	    
+			                        <p:outputLabel for="salas" style="font-weight: bold" value="Número de salas: " /> 
+			                        <p:inputText styleClass="mask" id="salas" onkeydown="mascara(this.id)" onkeyup="mascara(this.id)" value="#{filtro.salas}" maxlength="3"                                         
+			                                         />
+			                        		                        
+			                           
+			                        <p:outputLabel for="piscina" style="font-weight: bold" value="Piscina:" /> 
+			                            <p:selectOneMenu id="piscina" value="#{filtro.piscina}" style="width:125px">
+			                                <f:selectItem itemLabel="Sim" itemValue="1" />
+			                                <f:selectItem itemLabel="Não" itemValue="0" />    
+			                                <f:selectItem itemLabel="Indiferente" itemValue="2" />                            
+			                            </p:selectOneMenu>
+			                        
+			                                                
+			                        <p:outputLabel for="garagem" style="font-weight: bold" value="Garagem:" /> 
+			                            <p:selectOneMenu id="garagem" value="#{filtro.garagem}" style="width:125px">
+			                                <f:selectItem itemLabel="Sim" itemValue="1" />
+			                                <f:selectItem itemLabel="Não" itemValue="0" />        
+			                                <f:selectItem itemLabel="Indiferente" itemValue="2" />                        
+			                            </p:selectOneMenu>
+			                        
+			                        
+			                        <p:outputLabel for="salaReuniao" style="font-weight: bold" value="Sala de reunião:" /> 
+			                            <p:selectOneMenu id="salaReuniao" value="#{filtro.salaReuniao}" style="width:125px">
+			                                <f:selectItem itemLabel="Sim" itemValue="1" />
+			                                <f:selectItem itemLabel="Não" itemValue="0" />    
+			                                <f:selectItem itemLabel="Indiferente" itemValue="2" />                            
+			                            </p:selectOneMenu>
+			                        
+			                        
+			                        <p:outputLabel for="beiraMar" style="font-weight: bold" value="Beira mar:" /> 
+			                            <p:selectOneMenu id="beiraMar" value="#{filtro.beiraMar}" style="width:125px">
+			                                <f:selectItem itemLabel="Sim" itemValue="1" />
+			                                <f:selectItem itemLabel="Não" itemValue="0" />
+			                                <f:selectItem itemLabel="Indiferente" itemValue="2" />                                
+			                            </p:selectOneMenu>
+		
+			                                                
+			                        <p:outputLabel for="valor" style="font-weight: bold;" value="Faixas de preço:" /> 
+			                            <p:selectOneMenu id="valor" value="#{filtro.valor}" style="width:160px">
+			                            	<f:selectItem itemLabel="Até R$ 500" itemValue="1" />
+			                                <f:selectItem itemLabel="R$ 500 - R$ 1000" itemValue="2" />
+			                                <f:selectItem itemLabel="R$ 1000 - R$ 1500" itemValue="3" />
+			                                <f:selectItem itemLabel="R$ 1500 - R$ 2500" itemValue="4" />
+			                                <f:selectItem itemLabel="R$ 2500 - R$ 4000" itemValue="5" />
+			                                <f:selectItem itemLabel="R$ 4000 - R$ 5000" itemValue="6" />
+			                                <f:selectItem itemLabel="Acima de R$ 5000" itemValue="7" />
+			                            </p:selectOneMenu>
+			                        
+			                       	
+			                       	<p:outputLabel for="estado" style="font-weight: bold;" value="Estado:" /> 
+			                            <p:selectOneMenu id="estado" onchange="cidades(this.value)" value="#{filtro.estado}" style="width:200px">
+			                            	<f:selectItem itemLabel="Selecione um Estado" itemValue="" />
+			                            	<f:selectItem itemLabel="AC" itemValue="AC" />
+			                                <f:selectItem itemLabel="AL" itemValue="AL" />
+			                                <f:selectItem itemLabel="AM" itemValue="AM" />
+			                                <f:selectItem itemLabel="AP" itemValue="AP" />
+			                                <f:selectItem itemLabel="BA" itemValue="BA" />
+			                                <f:selectItem itemLabel="CE" itemValue="CE" />
+			                                <f:selectItem itemLabel="DF" itemValue="DF" />
+			                                <f:selectItem itemLabel="ES" itemValue="ES" />
+			                                <f:selectItem itemLabel="GO" itemValue="GO" />
+			                                <f:selectItem itemLabel="MA" itemValue="MA" />
+			                                <f:selectItem itemLabel="MG" itemValue="MG" />
+			                                <f:selectItem itemLabel="MS" itemValue="MS" />
+			                                <f:selectItem itemLabel="MT" itemValue="MT" />
+			                                <f:selectItem itemLabel="PA" itemValue="PA" />
+			                                <f:selectItem itemLabel="PB" itemValue="PB" />
+			                                <f:selectItem itemLabel="PE" itemValue="PE" />
+			                                <f:selectItem itemLabel="PI" itemValue="PI" />
+			                                <f:selectItem itemLabel="PR" itemValue="PR" />
+			                                <f:selectItem itemLabel="RJ" itemValue="RJ" />
+			                                <f:selectItem itemLabel="RN" itemValue="RN" />
+			                                <f:selectItem itemLabel="RO" itemValue="RO" />
+			                                <f:selectItem itemLabel="RR" itemValue="RR" />
+			                                <f:selectItem itemLabel="RS" itemValue="RS" />
+			                                <f:selectItem itemLabel="SC" itemValue="SC" />
+			                                <f:selectItem itemLabel="SE" itemValue="SE" />
+			                                <f:selectItem itemLabel="SP" itemValue="SP" />
+			                                <f:selectItem itemLabel="TO" itemValue="TO" />                                
+			                            	
+			                                <f:ajax event="blur" execute="cidades" render="cidade" />
+			                                
+			                            </p:selectOneMenu>
+			                                           
+			                        	                       								
+									<p:outputLabel for="cidade" style="font-weight: bold" value="Cidades:" /> 
+			                           
+			                        <h:panelGroup layout="block" style="display:flex; flex-direction:row;" > 
+			                          
+			                            <p:selectOneMenu id="cidade" value="#{filtro.cidade}" style="width:125px">		                                		                                
+			                                				                                                                      		                                                
+			                             	<f:selectItems value="#{filtro.cidades()}" var="n" itemValue="#{n}" itemLabel="#{n}" />                                                      
+			                            		                            	
+			                            </p:selectOneMenu>
+			                            
+			                            <p:graphicImage id="loader" style="display:none; width:30px; height:30px" library="imagens" name="loader.gif"/>
+										        
+									</h:panelGroup>		 
+									                      
+			                            
+			                     </h:panelGrid>
 									
-									<p:commandButton value="Exibir Endereço" onclick="PF('dlg').show();" type="button" />                               		
-                               		<p:dialog width="300" modal="true" appendTo="@(body)" header="Busca localizada" 
-                             				 widgetVar="dlg" hideEffect="fade" showEffect="fade">                               
-                               
-		                                   <h:outputText value="Número: #{listaImovel.endereco.numero}" />         
-		                                   <h:outputText value="Rua: #{listaImovel.endereco.rua}" />
-		                                   <h:outputText value="Bairro: #{listaImovel.endereco.bairro}" /> 
-		                                   <h:outputText value="Cidade: #{listaImovel.endereco.cidade}" />                                                    
-		                                   <h:outputText value="Estado: #{listaImovel.endereco.estado}" />                                
-                                
-                                	</p:dialog>
-                                
-                                </p:column> 
-                                
-                                <!-- <p:column style="text-align: center; width: 12%" headerText="Imagens">
-                                                                       
-                                    <p:carousel value="#{listaImovel.imagens}" headerText="Imagens" 
-                                	var="img" itemStyle="height:65px;text-align:center" numVisible="1" easing="easeOutBounce" 
-                                	style="width:200px" circular="true">
-								    
-								        <h:panelGrid columns="1" style="width:100%" columnClasses="label,value">
-								            								 
-								            <p:graphicImage value="#{imovel.byteToStream(img)}" height="180px" width="250px"/>						 
-								           
-								        </h:panelGrid>
-								    </p:carousel>                                       
-                                                           
-                                </p:column>  -->
-                                
-                            </p:dataTable>                        
-                                                      
-                            
-                        </h:form>           
-                                                                
+									
+			        <br/>        <p:commandButton ajax="false" value="Filtrar" actionListener="#{filtro.setFiltrar(0)}" />
+			                        
+			                     <h:inputHidden id="cidades" value="#{filtro.cidadejson}" />   
+			                                                                         
+		                            
+		                    </h:form>       
+		                        
+                        
+                    </ui:fragment>    
+                        
                         
                 </p:layoutUnit>
 
