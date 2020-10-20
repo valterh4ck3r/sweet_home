@@ -84,9 +84,15 @@ public class CadastroImovel implements Serializable {
     private String filtrarQuantidadeQuartos = "0";
     private String filtrarMetrosQuadradosMinimo = "0";
     private String filtrarMetrosQuadradosMaximo = "0";
+    
+    private String filtrarValorMinimo = "0";
+    private String filtrarValorMaximo = "0";
 
     private UIComponent metrosMessage;   
     private String metrosMessageError = ""; 
+    
+    private UIComponent valorMessage;
+    private String valorMessageError = ""; 
         
     private Part imageFile; 
     
@@ -161,13 +167,22 @@ public class CadastroImovel implements Serializable {
 		} else {
 			metrosMessageError = "";
 		}
+		
+		if((Integer.parseInt(filtrarValorMinimo) > Integer.parseInt(filtrarValorMaximo))) {
+	        FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(metrosMessage.getClientId(context), 
+                    new FacesMessage("", "Filtro de valores estão incorretos"));	    
+            valorMessageError = "Filtro de valores estão incorretos";
+		} else {
+			valorMessageError = "";
+		}
 				
 		if(!filtrar) return imovelServico.recuperarImoveis();
 	
 		
 		else {
 			filtrar = false;
-			return imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadradosMinimo) , Integer.parseInt(filtrarMetrosQuadradosMaximo));        
+			return imovelServico.recuperarImoveisComFiltro(filtrarGaragem, filtrarPiscina, filtrarBeiraMar, filtrarSalaReuniao , Integer.parseInt(filtrarQuantidadeQuartos) ,  Integer.parseInt(filtrarMetrosQuadradosMinimo) , Integer.parseInt(filtrarMetrosQuadradosMaximo), Integer.parseInt(filtrarValorMinimo), Integer.parseInt(filtrarValorMaximo));        
 		}
 		
 			
@@ -239,6 +254,15 @@ public class CadastroImovel implements Serializable {
             metrosMessageError = "Filtro de metros quadrados estão incorretos";
 		} else {
             metrosMessageError = "";
+		}
+		
+		if((Integer.parseInt(filtrarValorMinimo) > Integer.parseInt(filtrarValorMaximo))) {
+	        FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(metrosMessage.getClientId(context), 
+                    new FacesMessage("", "Filtro de valores estão incorretos"));	    
+            valorMessageError = "Filtro de valores estão incorretos";
+		} else {
+			valorMessageError = "";
 		}
     }
     
@@ -516,5 +540,39 @@ public class CadastroImovel implements Serializable {
 	public void setMetros(String metros) {
 		this.metros = metros;
 	}
+
+	public String getFiltrarValorMinimo() {
+		return filtrarValorMinimo;
+	}
+
+	public void setFiltrarValorMinimo(String filtrarValorMinimo) {
+		this.filtrarValorMinimo = filtrarValorMinimo;
+	}
+
+	public String getFiltrarValorMaximo() {
+		return filtrarValorMaximo;
+	}
+
+	public void setFiltrarValorMaximo(String filtrarValorMaximo) {
+		this.filtrarValorMaximo = filtrarValorMaximo;
+	}
+
+	public UIComponent getValorMessage() {
+		return valorMessage;
+	}
+
+	public void setValorMessage(UIComponent valorMessage) {
+		this.valorMessage = valorMessage;
+	}
+
+	public String getValorMessageError() {
+		return valorMessageError;
+	}
+
+	public void setValorMessageError(String valorMessageError) {
+		this.valorMessageError = valorMessageError;
+	}
+	
+	
 	
 }

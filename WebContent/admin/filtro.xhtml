@@ -97,7 +97,22 @@
                     <br/>                    
                     <br/>
                     <br/>
+                    
 
+                    Filtrar por Valor  (R$)
+                    <br/>
+                    <br/>
+                    <h:inputText value="#{cadastroImovel.filtrarValorMinimo}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>&nbsp;&nbsp;&nbsp;entre&nbsp;&nbsp;&nbsp;
+                    <h:inputText value="#{cadastroImovel.filtrarValorMaximo}" onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"/>
+
+                    <p:outputLabel binding="#{cadastroImovel.valorMessage}" id="valorMessage" />
+                    <a style="color:red; font-size: 20px"><h:message for="valorMessage" /></a>
+           
+
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
 
                         <p:commandButton ajax="false" value="Pesquisar" actionListener="#{cadastroImovel.setFiltrar(true)}" action="/admin/todosImoveis.xhtml" />
 					    <h:messages />
