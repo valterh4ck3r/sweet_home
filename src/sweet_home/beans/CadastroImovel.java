@@ -141,6 +141,16 @@ public class CadastroImovel implements Serializable {
        Imovel i = imovelServico.consultarPorId(new Long(s));    	
        imovelServico.remover(i);      
     }
+    
+    public void esconderImovel(Imovel imovHide) {
+    	imovHide.setDisponivel(false);
+    	imovelServico.atualizar(imovHide);
+    }
+    
+    public void mostrarImovel(Imovel imovShow) {
+    	imovShow.setDisponivel(true);
+    	imovelServico.atualizar(imovShow);
+    }
 
     
     public void salvarImagem(FileUploadEvent event) {

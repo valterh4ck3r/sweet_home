@@ -33,10 +33,14 @@ public class ImovelServico extends Servico<Imovel> {
     public void salvar(Imovel imovel){
         entityManager.persist(imovel);
     }
+    
+    public void atualizar(Imovel imovel) {
+    	entityManager.merge(imovel);
+    }
                
     public List<Imovel> recuperarImoveis() {
         TypedQuery<Imovel> query
-                = entityManager.createNamedQuery("Imovel.RecuperarImoveis", classe);
+                = entityManager.createNamedQuery("Imovel.RecuperarDisponivel", classe);
         return query.getResultList();
     }    
     
@@ -55,7 +59,8 @@ public class ImovelServico extends Servico<Imovel> {
     	String beiraMar = mar.equals("2") ? "" : " AND i.beiraMar = :beiraMar";    	
     	String cid = cidade.length() == 0 ? "" : " AND i.endereco.cidade = :cidade";
     	String est = estado.length() == 0 ? "" : " AND i.endereco.estado = :estado";
-    	String valor = " AND i.valor BETWEEN :menor AND :maior";   	    	
+    	String valor = " AND i.valor BETWEEN :menor AND :maior";  
+    	String disponivel = " AND i.disponivel = true";
     	
         TypedQuery<Imovel> query
                 = entityManager.createQuery("SELECT i FROM Imovel i WHERE "
@@ -89,6 +94,16 @@ public class ImovelServico extends Servico<Imovel> {
     @TransactionAttribute(SUPPORTS) 
     public List<Imovel> recuperarPorUsuario(@NotNull Usuario u) {
         return super.consultarEntidades(new Object[] {u}, "Imovel.RecuperarPorUsuario");         
+    }
+    
+    @TransactionAttribute(SUPPORTS) 
+    public List<Imovel> recuperarPorImovelDisponivel(@NotNull Usuario u) {
+        return super.consultarEntidades(new Object[] {u}, "Imovel.RecuperarPorImovelDisponivel");         
+    }
+    
+    @TransactionAttribute(SUPPORTS) 
+    public List<Imovel> recuperarPorImovelIndiponivel(@NotNull Usuario u) {
+        return super.consultarEntidades(new Object[] {u}, "Imovel.RecuperarPorImovelIndisponivel");         
     }
         
     @TransactionAttribute(SUPPORTS) 

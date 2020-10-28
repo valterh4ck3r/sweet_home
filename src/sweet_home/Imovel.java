@@ -65,7 +65,7 @@ import org.primefaces.model.StreamedContent;
             ),
             @NamedQuery(
                     name = "Imovel.RecuperarImoveis",
-                    query = "SELECT i FROM Imovel i"
+                    query = "SELECT i FROM Imovel i "
             ),
             @NamedQuery(
                     name = "Imovel.RecuperarPorCidade",
@@ -78,6 +78,18 @@ import org.primefaces.model.StreamedContent;
             @NamedQuery(
                     name = "Imovel.RecuperarPorUsuario",
                     query = "SELECT i FROM Imovel i WHERE i.usuario = ?1"
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorImovelDisponivel",
+                    query = "SELECT i FROM Imovel i WHERE i.usuario = ?1 AND i.disponivel = true"
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarPorImovelIndisponivel",
+                    query = "SELECT i FROM Imovel i WHERE i.usuario = ?1 AND i.disponivel = false"
+            ),
+            @NamedQuery(
+                    name = "Imovel.RecuperarDisponivel",
+                    query = "SELECT i FROM Imovel i WHERE i.disponivel = true"
             ),
             @NamedQuery(
                     name = "Imovel.RecuperarPorId",
@@ -144,6 +156,10 @@ public class Imovel extends Entidade {
     @ElementCollection
     @Column(name = "IMAGENS")
     private List<byte[]> imagens;
+    
+    @NotNull
+    @Column(name = "DISPONIVEL")
+    private boolean disponivel = true;
         
     
     @NotNull
@@ -158,7 +174,7 @@ public class Imovel extends Entidade {
     	
     }
     
-    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, boolean piscina, boolean garagem, boolean salaReuniao, boolean beiraMar, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco) {
+    public Imovel(Long id, int quartos, int banheiros, int salas, String descricao, int tipo, boolean piscina, boolean garagem, boolean salaReuniao, boolean beiraMar, double valor, List<byte[]> imagens, Usuario usuario, Endereco endereco, boolean disponivel) {
     	
     	this.id = id;
     	this.quartos= quartos;
@@ -174,6 +190,7 @@ public class Imovel extends Entidade {
     	this.usuario = usuario;
     	this.endereco = endereco;    	
     	this.imagens = imagens;
+    	this.disponivel = disponivel;
     }
     
     public Long getId() {
@@ -262,6 +279,14 @@ public class Imovel extends Entidade {
     
     public void setBeiraMar(boolean beiraMar) {
     	this.beiraMar = beiraMar;
+    }
+    
+    public boolean getDisponivel() {
+    	return disponivel;
+    }
+    
+    public void setDisponivel(boolean disponivel) {
+    	this.disponivel = disponivel;
     }
     
     public List<byte[]> getImagens() {
