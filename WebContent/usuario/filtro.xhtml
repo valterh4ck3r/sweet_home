@@ -31,7 +31,8 @@
                     <p:menu>
                         <p:submenu label="Opções">
                             
-                 			<p:menuitem ajax="false" action="/usuario/index.xhtml" value="Voltar"/>                            
+                 			<p:menuitem ajax="false" action="/usuario/index.xhtml" value="Voltar"/>
+                 			<p:menuitem ajax="false" actionListener="#{login.logout()}" action="/indexLogin.xhtml" value="Logout"/>                            
                             	           
                         </p:submenu>
 

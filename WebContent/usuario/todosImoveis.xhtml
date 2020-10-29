@@ -39,7 +39,8 @@
 	                            <p:menuitem ajax="false" action="/usuario/meusImoveis.xhtml" value="Seus imóveis"/>
 	                            <p:menuitem ajax="false" rendered="#{cadastroImovel.cadastro()}" action="/usuario/editarImovel" value="Cadastrar imóvel"/>	
 	                            <p:menuitem ajax="false" actionListener="#{cadastroUsuario.dadosPessoais()}" action="/usuario/editarUsuario.xhtml" value="Editar dados pessoais"/>                            	                            
-	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/usuario/index.xhtml" value="Tela inicial"/>    
+	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/usuario/index.xhtml" value="Tela inicial"/>
+	                            <p:menuitem ajax="false" actionListener="#{login.logout()}" action="/indexLogin.xhtml" value="Logout"/>    
 	                            	           
 	                        </p:submenu>
 	
