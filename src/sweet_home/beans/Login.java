@@ -74,6 +74,7 @@ public class Login implements Serializable {
     	HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
     	sessao.setAttribute("logado", null);
 		sessao.removeAttribute("logado");
+		sessao.invalidate();
     }
       
    
