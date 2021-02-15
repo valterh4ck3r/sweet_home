@@ -34,11 +34,11 @@
 	                    <p:menu>
 	                        <p:submenu label="Opções">
 	                            	                 			                        
-	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/admin/todosImoveis.xhtml" value="Todos os imóveis"/>	                                             
-	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(1)}" action="/admin/todosImoveis.xhtml" value="Filtrar imóvel"/>                              
-	                            <p:menuitem ajax="false" actionListener="#{cadastroImovel.cadastro()}" action="/admin/editarImovel.xhtml" value="Cadastrar imóvel"/>	
-	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/admin/usuarios.xhtml" value="Usuários"/>                            	                            
-	                            <p:menuitem ajax="false" actionListener="#{filtro.setFiltrar(0)}" action="/admin/index.xhtml" value="Tela inicial"/>
+	                            <p:menuitem ajax="false" action="/admin/todosImoveis.xhtml" value="Todos os imóveis"/>	                                             
+	                            <p:menuitem ajax="false" action="/admin/todosImoveis.xhtml" value="Filtrar imóvel"/>                              
+	                            <p:menuitem ajax="false" action="/admin/editarImovel.xhtml" value="Cadastrar imóvel"/>	
+	                            <p:menuitem ajax="false" action="/admin/usuarios.xhtml" value="Usuários"/>                            	                            
+	                            <p:menuitem ajax="false" action="/admin/index.xhtml" value="Tela inicial"/>
 	                            	           
 	                        </p:submenu>
 	
@@ -154,9 +154,16 @@
 											    
 											</p:dialog>                                  
 		                                                           
-		                                </p:column> 
+		                                </p:column>
+		                                 
 		                                
-		                                
+		                                <p:column style="text-align: center; width: 120px" headerText= "Disponivel">		                                
+		                                	<p:commandButton value="Disponivel" onclick="PF(#{listaImovel.id}).show();" type="button" />                               		
+			                               		<p:dialog width="600" modal="true" appendTo="@(body)" header="Detalhes" 
+			                             				 widgetVar="#{listaImovel.id}" hideEffect="clip" showEffect="clip">
+	                             				</p:dialog>
+		                                </p:column>
+		                                		                                
 		                                <p:column style="text-align: center; width: 25px;" >
 		                                	<p:commandLink ajax="false" actionListener="#{cadastroImovel.dadosImovel(listaImovel)}" 
 		                                								 action="/admin/editarImovel.xhtml">

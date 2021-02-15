@@ -49,7 +49,7 @@ public class Login implements Serializable {
               if(user != null) {
                     if(user.getSenha().equals(senha)) {
                              
-                        HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+                        HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
                         sessao.setAttribute("logado", user);
                         if(tipo.equals("Usuario")) return "encontrado";
                         else return "admin";                    
@@ -69,6 +69,13 @@ public class Login implements Serializable {
               }  
          
     }   
+    
+    public void logout() {
+    	HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+    	sessao.setAttribute("logado", null);
+		sessao.removeAttribute("logado");
+		sessao.invalidate();
+    }
       
    
     public String getSenha() {

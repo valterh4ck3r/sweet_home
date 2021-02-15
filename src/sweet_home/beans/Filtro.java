@@ -86,7 +86,16 @@ private static final long serialVersionUID = 1L;
              	    	   	
     	return imovelServico.recuperarPorUsuario(usuario);   	    	
     }
-     
+    
+    public List<Imovel> meusimoveisDisponiveis() {
+ 	   	
+    	return imovelServico.recuperarPorImovelDisponivel(usuario);   	    	
+    }
+    
+    public List<Imovel> meusimoveisIndisponiveis() {
+ 	   	
+    	return imovelServico.recuperarPorImovelIndiponivel(usuario);   	    	
+    }         
     
     public List<Imovel> imoveis() {   
     	

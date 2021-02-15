@@ -118,14 +118,14 @@ public class DataLoader implements Serializable {
 		
 		for(int i = 1; i < 22; i++) l.add(Imovel.imagetoBytes("C:\\imagens\\"+i+".jpg"));		
 		
-		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 1", 1, false, true, false, false, 1000.5, l.subList(0, 3), usuarios.get(0), e1));
-		imovelServico.persistir(new Imovel(null, 2, 3, 4, "Descricao 2", 2, true, true, false, false, 1400, l.subList(3, 6), usuarios.get(0), e2));
-		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 3", 2, true, true, true, true, 2200, l.subList(6, 9), usuarios.get(3), e3));
-		imovelServico.persistir(new Imovel(null, 1, 1, 1, "Descricao 4", 1, false, false, false, false, 500, l.subList(9, 12), usuarios.get(5), e4));
-		imovelServico.persistir(new Imovel(null, 2, 2, 2, "Descricao 5", 2, true, false, true, true, 1800, l.subList(12, 15), usuarios.get(5), e5));
-		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 6", 2, false, true, true, true, 3000, l.subList(15, 18), usuarios.get(2), e6));
-		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 7", 2, false, true, true, true, 2500, l.subList(18, 20), usuarios.get(8), e7));
-		imovelServico.persistir(new Imovel(null, 0, 0, 0, "Descricao 8", 3, false, false, false, false, 1000, l.subList(20, 21), usuarios.get(9), e8));
+		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 1", 1, false, true, false, false, 1000.5, l.subList(0, 3), usuarios.get(0), e1, true));
+		imovelServico.persistir(new Imovel(null, 2, 3, 4, "Descricao 2", 2, true, true, false, false, 1400, l.subList(3, 6), usuarios.get(0), e2, true));
+		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 3", 2, true, true, true, true, 2200, l.subList(6, 9), usuarios.get(3), e3, true));
+		imovelServico.persistir(new Imovel(null, 1, 1, 1, "Descricao 4", 1, false, false, false, false, 500, l.subList(9, 12), usuarios.get(5), e4, true));
+		imovelServico.persistir(new Imovel(null, 2, 2, 2, "Descricao 5", 2, true, false, true, true, 1800, l.subList(12, 15), usuarios.get(5), e5, true));
+		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 6", 2, false, true, true, true, 3000, l.subList(15, 18), usuarios.get(2), e6, true));
+		imovelServico.persistir(new Imovel(null, 1, 2, 2, "Descricao 7", 2, false, true, true, true, 2500, l.subList(18, 20), usuarios.get(8), e7, true));
+		imovelServico.persistir(new Imovel(null, 0, 0, 0, "Descricao 8", 3, false, false, false, false, 1000, l.subList(20, 21), usuarios.get(9), e8, true));
 	}
 			
 	
